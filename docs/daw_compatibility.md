@@ -19,3 +19,13 @@ Might encounter some problems with the newer (VST3) platform
 Only on the Linux platform
 
 [More details](https://github.com/muse-sequencer/muse)
+
+## Reaper
+
+Professional grade cross-platform software with a 60 days full feature trial period
+
+However, the software is functional even after that period
+
+Support for VST3 guaranteed
+
+[More details](https://www.reaper.fm/)

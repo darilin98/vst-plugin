@@ -24,7 +24,9 @@ include_directories(vst-plugin PRIVATE
 )
 
 set(SOURCES
-    main.cpp
+        controller.cpp
+        pluginfactory.cpp
+        processor.cpp
 )
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")

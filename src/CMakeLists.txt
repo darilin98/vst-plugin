@@ -17,12 +17,6 @@ FetchContent_MakeAvailable(vst3sdk)
 # Set the VST3 SDK base directory
 set(VST3_SDK_PATH ${vst3sdk_SOURCE_DIR})
 
-include_directories(vst-plugin PRIVATE
-        ${VST3_SDK_PATH}
-        ${VST3_SDK_PATH}/pluginterfaces
-        ${VST3_SDK_PATH}/public.sdk/source/vst/
-)
-
 set(SOURCES
         controller.cpp
         pluginfactory.cpp
@@ -40,6 +34,14 @@ endif()
 # Define target
 add_library(vst-plugin MODULE ${SOURCES})
 
+target_include_directories(vst-plugin PRIVATE
+        ${VST3_SDK_PATH}
+        ${VST3_SDK_PATH}/pluginterfaces
+        ${VST3_SDK_PATH}/public.sdk/source/vst/
+)
+
+target_link_libraries(vst-plugin PRIVATE sdk "-framework CoreFoundation")
+
 # Define the output directory
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -47,7 +49,17 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Specify the plugin format, version, etc.
 set_target_properties(vst-plugin PROPERTIES
-        LIBRARY_OUTPUT_NAME "vst-plugin"
-        SUFFIX ".vst3"
-        BUILD_WITH_INSTALL_RPATH ON
+        BUNDLE TRUE
+        BUNDLE_EXTENSION "vst3"
+        MACOSX_BUNDLE TRUE
+        PREFIX ""
+        # SUFFIX ".vst3"
+        OUTPUT_NAME "vst-plugin"
+        MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/Info.plist"
+)
+
+# Install the plugin to the standard VST3 path
+install(TARGETS vst-plugin
+        BUNDLE DESTINATION "$ENV{HOME}/Library/Audio/Plug-Ins/VST3"
+        LIBRARY DESTINATION "$ENV{HOME}/Library/Audio/Plug-Ins/VST3"
 )

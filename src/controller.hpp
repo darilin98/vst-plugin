@@ -19,5 +19,6 @@ public:
     static FUnknown* createInstance(void*) { return (IEditController*)new PluginController(); }
 
     tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;
+    tresult PLUGIN_API terminate() SMTG_OVERRIDE;
 };
 #endif //CONTROLLER_HPP

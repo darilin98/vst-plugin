@@ -15,9 +15,12 @@
 
 using namespace Steinberg::Vst;
 
-// TEMPORARY - should be generated random IDs
-FUID PluginProcessorUID = FUID::fromTUID("9CC5B171-97F5-4ADB-9F65-013A306C73C2");
-FUID PluginControllerUID = FUID::fromTUID("DA511324-A388-46E0-B50E-DCCDE24FD078");
+extern "C" bool bundleEntry() {
+    return true;
+}
+
+extern "C" void bundleExit() {
+}
 
 BEGIN_FACTORY_DEF("MyCompany",
                   "https://mycompany.com",
@@ -27,7 +30,7 @@ BEGIN_FACTORY_DEF("MyCompany",
     DEF_CLASS2(INLINE_UID_FROM_FUID(PluginProcessorUID),
                PClassInfo::kManyInstances, // multiple instances allowed
                kVstAudioEffectClass,       // Component category
-               "My Plugin Processor",      // Plugin name
+               "The Best Plugin Ever",      // Plugin name
                Vst::kDistributable,        // Distributable attribute
                "Fx|Synth",                 // Subcategories
                "1.0.0",                     // Version
@@ -46,8 +49,4 @@ BEGIN_FACTORY_DEF("MyCompany",
                PluginController::createInstance)
 
 END_FACTORY
-
-FUID bundleEntry() {
-    return PluginProcessorUID;  // Return the FUID of the main processor class
-}
 

@@ -52,14 +52,12 @@ set_target_properties(vst-plugin PROPERTIES
         BUNDLE TRUE
         BUNDLE_EXTENSION "vst3"
         MACOSX_BUNDLE TRUE
-        PREFIX ""
-        # SUFFIX ".vst3"
         OUTPUT_NAME "vst-plugin"
         MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/Info.plist"
 )
 
-# Install the plugin to the standard VST3 path
-install(TARGETS vst-plugin
-        BUNDLE DESTINATION "$ENV{HOME}/Library/Audio/Plug-Ins/VST3"
-        LIBRARY DESTINATION "$ENV{HOME}/Library/Audio/Plug-Ins/VST3"
-)
+# Create symlink
+install(CODE "
+  execute_process(COMMAND ln -sf ${CMAKE_BINARY_DIR}/vst-plugin.vst3 \$ENV{HOME}/Library/Audio/Plug-Ins/VST3/vst-plugin.vst3)
+  message(STATUS \"Created symlink: \$ENV{HOME}/Library/Audio/Plug-Ins/VST3/vst-plugin.vst3 -> ${CMAKE_BINARY_DIR}/vst-plugin.vst3\")
+")

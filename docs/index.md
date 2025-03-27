@@ -13,3 +13,7 @@ Details about which DAW software the plugin will be deployed and tested on
 ### [Sources & other external information](resources.md)
 
 Resources used during the development of the project
+
+### [Dev Journal](devjournal/2025-03-27.md)
+
+Personal journal documenting the development process

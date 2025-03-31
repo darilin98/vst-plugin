@@ -7,6 +7,7 @@
 
 #include "public.sdk/source/vst/vstaudioeffect.h"
 #include "pluginterfaces/base/ustring.h"
+#include <fftw3.h>
 
 using namespace Steinberg::Vst;
 using namespace Steinberg;

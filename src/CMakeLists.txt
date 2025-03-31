@@ -14,6 +14,22 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(vst3sdk)
 
+FetchContent_Declare(
+    fftw
+    URL http://www.fftw.org/fftw-3.3.10.tar.gz
+)
+FetchContent_MakeAvailable(fftw)
+
+set(ENABLE_STATIC ON CACHE BOOL "Build static FFTW")
+set(ENABLE_SHARED OFF CACHE BOOL "Disable shared FFTW")
+
+# Ensure FFTW builds
+FetchContent_GetProperties(fftw)
+if(NOT fftw_POPULATED)
+    FetchContent_Populate(fftw)
+    add_subdirectory(${fftw_SOURCE_DIR} ${fftw_BINARY_DIR})
+endif()
+
 # Set the VST3 SDK base directory
 set(VST3_SDK_PATH ${vst3sdk_SOURCE_DIR})
 
@@ -38,9 +54,12 @@ target_include_directories(vst-plugin PRIVATE
         ${VST3_SDK_PATH}
         ${VST3_SDK_PATH}/pluginterfaces
         ${VST3_SDK_PATH}/public.sdk/source/vst/
+        ${fftw_SOURCE_DIR}/api
 )
 
-target_link_libraries(vst-plugin PRIVATE sdk "-framework CoreFoundation")
+target_link_libraries(vst-plugin PRIVATE sdk "-framework CoreFoundation"
+                                         fftw3
+)
 
 # Define the output directory
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)

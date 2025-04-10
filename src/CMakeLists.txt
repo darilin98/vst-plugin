@@ -23,6 +23,12 @@ FetchContent_MakeAvailable(fftw)
 set(ENABLE_STATIC ON CACHE BOOL "Build static FFTW")
 set(ENABLE_SHARED OFF CACHE BOOL "Disable shared FFTW")
 
+set(ENABLE_FLOAT ON CACHE BOOL "Enable single precision (float) FFTW" FORCE)
+set(ENABLE_DOUBLE OFF CACHE BOOL "Disable double precision FFTW" FORCE)
+set(ENABLE_LONG_DOUBLE OFF CACHE BOOL "Disable long double FFTW" FORCE)
+set(ENABLE_SHARED OFF CACHE BOOL "Disable shared FFTW" FORCE)
+set(ENABLE_STATIC ON CACHE BOOL "Enable static FFTW" FORCE)
+
 # Ensure FFTW builds
 FetchContent_GetProperties(fftw)
 if(NOT fftw_POPULATED)
@@ -35,8 +41,10 @@ set(VST3_SDK_PATH ${vst3sdk_SOURCE_DIR})
 
 set(SOURCES
         controller.cpp
+        controller.hpp
         pluginfactory.cpp
         processor.cpp
+        processor.hpp
 )
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -55,10 +63,12 @@ target_include_directories(vst-plugin PRIVATE
         ${VST3_SDK_PATH}/pluginterfaces
         ${VST3_SDK_PATH}/public.sdk/source/vst/
         ${fftw_SOURCE_DIR}/api
+        ${fftw_SOURCE_DIR}
+        ${fftw_BINARY_DIR}
 )
 
 target_link_libraries(vst-plugin PRIVATE sdk "-framework CoreFoundation"
-                                         fftw3
+                                         fftw3f
 )
 
 # Define the output directory

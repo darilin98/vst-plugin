@@ -45,6 +45,8 @@ set(SOURCES
         pluginfactory.cpp
         processor.cpp
         processor.hpp
+        fftprocessor.hpp
+        fftprocessor.cpp
 )
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")

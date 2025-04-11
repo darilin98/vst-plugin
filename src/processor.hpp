@@ -7,7 +7,7 @@
 
 #include "public.sdk/source/vst/vstaudioeffect.h"
 #include "pluginterfaces/base/ustring.h"
-#include <fftw3.h>
+#include "fftprocessor.hpp"
 
 using namespace Steinberg::Vst;
 using namespace Steinberg;
@@ -29,5 +29,7 @@ public:
     tresult PLUGIN_API process(ProcessData& data) SMTG_OVERRIDE;
     tresult PLUGIN_API setState(IBStream* state) SMTG_OVERRIDE;
     tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
+private:
+    FFTProcessor fft_processor_;
 };
 #endif //PROCESSOR_HPP

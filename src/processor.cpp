@@ -11,6 +11,7 @@ tresult PLUGIN_API PluginProcessor::initialize(FUnknown *context)
     if (result != kResultOk) {
         return result;
     }
+    fft_processor_.prepare(1024);
     addAudioInput(USTRING("Stereo In"), SpeakerArr::kStereo);
     addAudioOutput(USTRING("Stereo Out"), SpeakerArr::kStereo);
     return kResultOk;
@@ -31,40 +32,7 @@ tresult PLUGIN_API PluginProcessor::process(ProcessData& data)
     float* input = data.inputs[0].channelBuffers32[0];
     float* output = data.outputs[0].channelBuffers32[0];
 
-    auto* in = (float*)fftwf_malloc(sizeof(float) * numSamples);
-    auto* out = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex) * (numSamples /2 + 1));
-    auto* processed = (float*)fftwf_malloc(sizeof(float) * numSamples);
-
-    std::copy(input, input + numSamples, in);
-    fftwf_plan planFwd = fftwf_plan_dft_r2c_1d(numSamples, in, out, FFTW_ESTIMATE);
-    fftwf_plan planInv = fftwf_plan_dft_c2r_1d(numSamples, out, processed, FFTW_ESTIMATE);
-
-    fftwf_execute(planFwd);
-
-    for (int i = 0; i < numSamples / 2 + 1; ++i) {
-        float freq = (i * sampleRate) / numSamples;
-
-        float gain = 1.0f;
-        if (freq > 100 && freq < 200)
-            gain = 0.5f;  // cut
-        else if (freq > 1000 && freq < 3000)
-            gain = 2.0f;  // boost
-
-        out[i][0] *= gain;  // real part
-        out[i][1] *= gain;  // imag part
-    }
-
-    fftwf_execute(planInv);
-
-    for (int i = 0; i < numSamples; ++i)
-        output[i] = processed[i] / numSamples;
-
-    fftwf_destroy_plan(planFwd);
-    fftwf_destroy_plan(planInv);
-
-    fftwf_free(in);
-    fftwf_free(out);
-    fftwf_free(processed);
+    fft_processor_.process(input, output, sampleRate, numSamples);
 
     return kResultOk;
 }

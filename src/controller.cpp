@@ -5,7 +5,11 @@
 
 tresult PLUGIN_API PluginController::initialize(FUnknown* context)
 {
-    EditController::initialize(context);
+    tresult result = EditController::initialize(context);
+    if (result != kResultOk)
+        return result;
+    parameters.removeAll();
+    parameters.addParameter(STR16("Gain"), nullptr, 0, 0.5, ParameterInfo::kCanAutomate, 100);
     return kResultOk;
 }
 

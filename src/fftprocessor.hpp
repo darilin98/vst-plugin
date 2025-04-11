@@ -2,10 +2,8 @@
 // Created by Darek Rudiš on 11.04.2025.
 //
 #pragma once
-#include <Availability.h>
 #include <fftw3.h>
-#include <sys/proc.h>
-#include <__bit_reference>
+#include <algorithm>
 #include "base/ftypes.h"
 
 #ifndef FFTPROCESSOR_HPP

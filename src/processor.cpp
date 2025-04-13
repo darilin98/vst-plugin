@@ -26,14 +26,18 @@ tresult PLUGIN_API PluginProcessor::process(ProcessData& data)
     if (numSamples == 0)
         return kResultOk;
 
-    float sampleRate = this->processSetup.sampleRate;
+    const float sampleRate = this->processSetup.sampleRate;
 
-    // Assuming only mono input for now
-    float* input = data.inputs[0].channelBuffers32[0];
-    float* output = data.outputs[0].channelBuffers32[0];
+    const int32 numChannels = data.inputs[0].numChannels;
 
-    fft_processor_.process(input, output, sampleRate, numSamples);
+    for (int32 ch = 0; ch < numChannels; ++ch)
+    {
+        float* input = data.inputs[0].channelBuffers32[ch];
+        float* output = data.outputs[0].channelBuffers32[ch];
 
+        if (input && output)
+            fft_processor_.process(input, output, sampleRate, numSamples);
+    }
     return kResultOk;
 }
 

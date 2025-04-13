@@ -11,9 +11,24 @@ tresult PLUGIN_API PluginProcessor::initialize(FUnknown *context)
     if (result != kResultOk) {
         return result;
     }
-    fft_processor_.prepare(1024);
     addAudioInput(USTRING("Stereo In"), SpeakerArr::kStereo);
     addAudioOutput(USTRING("Stereo Out"), SpeakerArr::kStereo);
+    return kResultOk;
+}
+tresult PluginProcessor::setupProcessing(ProcessSetup &setup)
+{
+    BusInfo busInfo;
+    if (getBusInfo(kAudio, kInput, 0, busInfo) == kResultOk)
+    {
+        int32 maxChannels = busInfo.channelCount;
+
+        fft_processors_.resize(maxChannels);
+
+        for (auto&& fft_processor : fft_processors_)
+        {
+            fft_processor.prepare(1024);
+        }
+    }
     return kResultOk;
 }
 
@@ -36,7 +51,7 @@ tresult PLUGIN_API PluginProcessor::process(ProcessData& data)
         float* output = data.outputs[0].channelBuffers32[ch];
 
         if (input && output)
-            fft_processor_.process(input, output, sampleRate, numSamples);
+            fft_processors_[ch].process(input, output, sampleRate, numSamples);
     }
     return kResultOk;
 }

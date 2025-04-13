@@ -10,6 +10,10 @@
 
 - Try out MusE on Linux, whether it supports VST3 plugins
 
-- Link a project with the FFTW library
+- [x] Link a project with the FFTW library
 
 - Research and gather information on Fourier transform
+
+- Try to use window function in the FFT process
+
+- Connect user parameters with audio process method

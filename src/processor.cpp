@@ -47,7 +47,7 @@ tresult PLUGIN_API PluginProcessor::process(ProcessData& data)
 
     const float sampleRate = this->processSetup.sampleRate;
 
-    const int32 numChannels = data.inputs[0].numChannels;
+    const int32 numChannels = std::min(data.inputs[0].numChannels, static_cast<int32>(fft_processors_.size()));
 
     for (int32 ch = 0; ch < numChannels; ++ch)
     {

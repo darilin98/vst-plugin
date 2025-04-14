@@ -11,7 +11,7 @@
 
 class FFTProcessor {
 public:
-    FFTProcessor() = default;
+    FFTProcessor();
     ~FFTProcessor();
     void prepare(int32_t fft_size);
     void process(float* input, float* output, float sample_rate, Steinberg::int32 num_samples);

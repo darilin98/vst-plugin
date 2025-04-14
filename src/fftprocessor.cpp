@@ -3,6 +3,15 @@
 //
 #include "fftprocessor.hpp"
 
+FFTProcessor::FFTProcessor()
+: fft_size_(0)
+, in_(nullptr)
+, processed_(nullptr)
+, out_(nullptr)
+, plan_fwd_(nullptr)
+, plan_inv_(nullptr)
+{}
+
 FFTProcessor::~FFTProcessor()
 {
     fftwf_destroy_plan(plan_fwd_);
@@ -25,6 +34,13 @@ void FFTProcessor::prepare(int32_t fft_size)
 
 void FFTProcessor::process(float *input, float *output, float sample_rate, Steinberg::int32 num_samples)
 {
+    if (!in_ || !out_ || !processed_ || !plan_fwd_ || !plan_inv_)
+        return;
+
+    const int safe_samples = std::min(num_samples, fft_size_);
+
+    // std::fill(in_, in_ + fft_size_, 0.0f);
+
     std::copy(input, input + num_samples, in_);
 
     fftwf_execute(plan_fwd_);
@@ -43,6 +59,6 @@ void FFTProcessor::process(float *input, float *output, float sample_rate, Stein
     }
     fftwf_execute(plan_inv_);
 
-    for (int i = 0; i < fft_size_; ++i)
-        output[i] = processed_[i] / num_samples;
+    for (int i = 0; i < safe_samples; ++i)
+        output[i] = processed_[i] / fft_size_;
 }

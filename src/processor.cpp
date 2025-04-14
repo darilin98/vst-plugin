@@ -15,8 +15,12 @@ tresult PLUGIN_API PluginProcessor::initialize(FUnknown *context)
     addAudioOutput(USTRING("Stereo Out"), SpeakerArr::kStereo);
     return kResultOk;
 }
-tresult PluginProcessor::setupProcessing(ProcessSetup &setup)
+tresult PLUGIN_API PluginProcessor::setupProcessing(ProcessSetup &setup)
 {
+    tresult result = AudioEffect::setupProcessing(setup);
+    if(result != kResultOk)
+        return result;
+
     BusInfo busInfo;
     if (getBusInfo(kAudio, kInput, 0, busInfo) == kResultOk)
     {

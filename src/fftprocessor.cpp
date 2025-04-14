@@ -39,20 +39,20 @@ void FFTProcessor::process(float *input, float *output, float sample_rate, Stein
 
     const int safe_samples = std::min(num_samples, fft_size_);
 
-    // std::fill(in_, in_ + fft_size_, 0.0f);
+    std::fill(in_, in_ + fft_size_, 0.0f);
 
-    std::copy(input, input + num_samples, in_);
+    std::copy(input, input + safe_samples, in_);
 
     fftwf_execute(plan_fwd_);
 
-    for (int i = 0; i < num_samples / 2 + 1; ++i) {
-        float freq = (i * sample_rate) / num_samples;
+    for (int i = 0; i < fft_size_ / 2 + 1; ++i) {
+        float freq = (i * sample_rate) / fft_size_;
 
         float gain = 1.0f;
-        if (freq > 100 && freq < 200)
-            gain = 0.5f;  // cut
-        else if (freq > 1000 && freq < 3000)
-            gain = 1.5f;  // boost
+        if (freq > 250 && freq < 500)
+            gain = 0.7f;  // cut
+        else if (freq > 2000 && freq < 4000)
+            gain = 1.3f;  // boost
 
         out_[i][0] *= gain;  // real part
         out_[i][1] *= gain;  // imag part

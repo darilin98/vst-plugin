@@ -32,6 +32,6 @@ public:
     tresult PLUGIN_API setState(IBStream* state) SMTG_OVERRIDE;
     tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
 private:
-    std::vector<FFTProcessor> fft_processors_;
+    std::vector<std::unique_ptr<FFTProcessor>>  fft_processors_;
 };
 #endif //PROCESSOR_HPP

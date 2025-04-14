@@ -25,12 +25,12 @@ tresult PLUGIN_API PluginProcessor::setupProcessing(ProcessSetup &setup)
     if (getBusInfo(kAudio, kInput, 0, busInfo) == kResultOk)
     {
         int32 maxChannels = busInfo.channelCount;
-
         fft_processors_.resize(maxChannels);
 
-        for (auto&& fft_processor : fft_processors_)
+        for (int32 i = 0; i < maxChannels; ++i)
         {
-            fft_processor.prepare(1024);
+            fft_processors_[i] = std::make_unique<FFTProcessor>();
+            fft_processors_[i]->prepare(1024);
         }
     }
     return kResultOk;
@@ -54,8 +54,10 @@ tresult PLUGIN_API PluginProcessor::process(ProcessData& data)
         float* input = data.inputs[0].channelBuffers32[ch];
         float* output = data.outputs[0].channelBuffers32[ch];
 
-        if (input && output)
-            fft_processors_[ch].process(input, output, sampleRate, numSamples);
+        if (input && output) {
+            std::copy(input, input + numSamples, output);
+            fft_processors_[ch]->process(input, output, sampleRate, numSamples);
+        }
     }
     return kResultOk;
 }

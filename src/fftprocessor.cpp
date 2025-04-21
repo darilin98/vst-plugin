@@ -49,10 +49,11 @@ void FFTProcessor::process(float *input, float *output, float sample_rate, Stein
         float freq = (i * sample_rate) / fft_size_;
 
         float gain = 1.0f;
-        if (freq > 250 && freq < 500)
-            gain = 0.7f;  // cut
-        else if (freq > 2000 && freq < 4000)
-            gain = 1.3f;  // boost
+
+        if (freq > 400 && freq < 800)
+            gain = 0.5f;
+        else if (freq > 3000 && freq < 6000)
+            gain = 1.8f;
 
         out_[i][0] *= gain;  // real part
         out_[i][1] *= gain;  // imag part

@@ -16,6 +16,8 @@ using namespace Steinberg;
 static const FUID PluginProcessorUID(0xd07f0f74, 0x71df4221, 0x98a7dc36, 0x845c4cf5);
 static const FUID PluginControllerUID(0x16616cb1, 0xdace4b43, 0xb29ea085, 0xa674bb2d);
 
+constexpr int FFT_SIZE = 1024;
+
 class PluginProcessor : public AudioEffect
 {
 public:

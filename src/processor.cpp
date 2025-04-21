@@ -30,7 +30,7 @@ tresult PLUGIN_API PluginProcessor::setupProcessing(ProcessSetup &setup)
         for (int32 i = 0; i < maxChannels; ++i)
         {
             fft_processors_[i] = std::make_unique<FFTProcessor>();
-            fft_processors_[i]->prepare(1024);
+            fft_processors_[i]->prepare(FFT_SIZE);
         }
     }
     return kResultOk;

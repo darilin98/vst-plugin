@@ -28,8 +28,8 @@ void FFTProcessor::prepare(int32_t fft_size)
     out_ = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex) * (fft_size_ /2 + 1));
     processed_ = (float*)fftwf_malloc(sizeof(float) * fft_size_);
 
-    plan_fwd_ = fftwf_plan_dft_r2c_1d(fft_size_, in_, out_, FFTW_ESTIMATE);
-    plan_inv_ = fftwf_plan_dft_c2r_1d(fft_size_, out_, processed_, FFTW_ESTIMATE);
+    plan_fwd_ = fftwf_plan_dft_r2c_1d(fft_size_, in_, out_, FFTW_MEASURE);
+    plan_inv_ = fftwf_plan_dft_c2r_1d(fft_size_, out_, processed_, FFTW_MEASURE);
 }
 
 void FFTProcessor::process(float *input, float *output, float sample_rate, Steinberg::int32 num_samples)

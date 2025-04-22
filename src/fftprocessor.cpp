@@ -5,6 +5,8 @@
 
 FFTProcessor::FFTProcessor()
 : fft_size_(0)
+, hop_size_(0)
+, write_pos_(0)
 , in_(nullptr)
 , processed_(nullptr)
 , out_(nullptr)
@@ -24,6 +26,9 @@ FFTProcessor::~FFTProcessor()
 void FFTProcessor::prepare(int32_t fft_size)
 {
     fft_size_ = fft_size;
+    hop_size_ = fft_size_ / 2;
+    input_buffer_.assign(fft_size_, 0.0f);
+
     in_ = (float*)fftwf_malloc(sizeof(float) * fft_size_);
     out_ = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex) * (fft_size_ /2 + 1));
     processed_ = (float*)fftwf_malloc(sizeof(float) * fft_size_);
@@ -35,6 +40,8 @@ void FFTProcessor::prepare(int32_t fft_size)
     window_.resize(fft_size_);
     for (int i = 0; i < fft_size_; ++i)
         window_[i] = 0.5f * (1.0f - cosf((2.0f * M_PI * i) / (fft_size_ - 1.0f)));
+    overlap_add_buffer_.resize(fft_size_ + hop_size_, 0.0f);
+    write_pos_ = 0;
 }
 
 void FFTProcessor::process(float *input, float *output, float sample_rate, Steinberg::int32 num_samples)

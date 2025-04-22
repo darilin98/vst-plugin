@@ -49,35 +49,52 @@ void FFTProcessor::process(float *input, float *output, float sample_rate, Stein
     if (!in_ || !out_ || !processed_ || !plan_fwd_ || !plan_inv_)
         return;
 
-    const int safe_samples = std::min(num_samples, fft_size_);
+    int samples_written = 0;
 
-    std::fill(in_, in_ + fft_size_, 0.0f);
+    while (samples_written < num_samples) {
+        int new_samples = std::min<int>(num_samples - samples_written, hop_size_);
 
-    std::copy(input, input + safe_samples, in_);
+        std::memmove(input_buffer_.data(),
+                     input_buffer_.data() + hop_size_,
+                     sizeof(float) * (fft_size_ - hop_size_));
 
-    for (int i = 0; i < safe_samples; ++i)
-        in_[i] *= window_[i];
+        std::copy(input + samples_written,
+                  input + samples_written + new_samples,
+                  input_buffer_.data() + (fft_size_ - hop_size_));
 
-    fftwf_execute(plan_fwd_);
+        for (int i = 0; i < fft_size_; ++i)
+            in_[i] = input_buffer_[i] * window_[i];
 
-    for (int i = 0; i < fft_size_ / 2 + 1; ++i) {
-        float freq = (i * sample_rate) / fft_size_;
+        fftwf_execute(plan_fwd_);
 
-        float gain = 1.0f;
+        for (int i = 0; i < fft_size_ / 2 + 1; ++i) {
+            float freq = (i * sample_rate) / fft_size_;
 
-        float cut_center = 600.0f;
-        float cut_width = 300.0f;
-        gain *= 1.0f - 0.3f * expf(-powf((freq - cut_center) / cut_width, 2.0f));
+            float gain = 1.0f;
+            float cut_center = 600.0f, cut_width = 300.0f;
+            gain *= 1.0f - 0.9f * expf(-powf((freq - cut_center) / cut_width, 2.0f));
 
-        float boost_center = 4500.0f;
-        float boost_width = 800.0f;
-        gain *= 1.0f + 0.2f * expf(-powf((freq - boost_center) / boost_width, 2.0f));
+            float boost_center = 4500.0f, boost_width = 800.0f;
+            gain *= 1.0f + 5.0f * expf(-powf((freq - boost_center) / boost_width, 2.0f));
 
-        out_[i][0] *= gain;  // real part
-        out_[i][1] *= gain;  // imag part
+            out_[i][0] *= gain;  // real part
+            out_[i][1] *= gain;  // imag part
+        }
+
+        fftwf_execute(plan_inv_);
+
+        for (int i = 0; i < fft_size_; ++i) {
+            float sample = (processed_[i] / fft_size_);
+            overlap_add_buffer_[(write_pos_ + i) % overlap_add_buffer_.size()] += sample;
+        }
+
+        for (int i = 0; i < hop_size_; ++i) {
+            output[samples_written + i] =
+              overlap_add_buffer_[(write_pos_ + i) % overlap_add_buffer_.size()];
+            overlap_add_buffer_[(write_pos_ + i) % overlap_add_buffer_.size()] = 0.f;
+        }
+
+        write_pos_ = (write_pos_ + hop_size_) % overlap_add_buffer_.size();
+        samples_written += hop_size_;
     }
-    fftwf_execute(plan_inv_);
-
-    for (int i = 0; i < safe_samples; ++i)
-        output[i] = processed_[i] / fft_size_;
 }

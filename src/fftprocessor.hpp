@@ -10,6 +10,8 @@
 #ifndef FFTPROCESSOR_HPP
 #define FFTPROCESSOR_HPP
 
+using array_t = std::vector<float>;
+
 class FFTProcessor {
 public:
     FFTProcessor();

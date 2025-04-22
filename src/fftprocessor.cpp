@@ -30,6 +30,11 @@ void FFTProcessor::prepare(int32_t fft_size)
 
     plan_fwd_ = fftwf_plan_dft_r2c_1d(fft_size_, in_, out_, FFTW_MEASURE);
     plan_inv_ = fftwf_plan_dft_c2r_1d(fft_size_, out_, processed_, FFTW_MEASURE);
+
+    // Hann window
+    window_.resize(fft_size_);
+    for (int i = 0; i < fft_size_; ++i)
+        window_[i] = 0.5f * (1.0f - cosf((2.0f * M_PI * i) / (fft_size_ - 1.0f)));
 }
 
 void FFTProcessor::process(float *input, float *output, float sample_rate, Steinberg::int32 num_samples)
@@ -42,6 +47,9 @@ void FFTProcessor::process(float *input, float *output, float sample_rate, Stein
     std::fill(in_, in_ + fft_size_, 0.0f);
 
     std::copy(input, input + safe_samples, in_);
+
+    for (int i = 0; i < safe_samples; ++i)
+        in_[i] *= window_[i];
 
     fftwf_execute(plan_fwd_);
 

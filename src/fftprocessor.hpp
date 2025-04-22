@@ -4,6 +4,7 @@
 #pragma once
 #include <fftw3.h>
 #include <algorithm>
+#include <vector>
 #include "base/ftypes.h"
 
 #ifndef FFTPROCESSOR_HPP
@@ -19,6 +20,7 @@ private:
     int fft_size_; ///< Should be 2^n
     float* in_;
     float* processed_;
+    std::vector<float> window_;
     fftwf_complex* out_;
     fftwf_plan plan_fwd_;
     fftwf_plan plan_inv_;

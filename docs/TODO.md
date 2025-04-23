@@ -14,6 +14,6 @@
 
 - Research and gather information on Fourier transform
 
-- Try to use window function in the FFT process
+- [x] Try to use window function in the FFT process
 
 - Connect user parameters with audio process method

@@ -3,6 +3,8 @@
 //
 #include "controller.hpp"
 
+#include "base/source/fstreamer.h"
+
 tresult PLUGIN_API PluginController::initialize(FUnknown* context)
 {
     tresult result = EditController::initialize(context);
@@ -19,4 +21,35 @@ tresult PLUGIN_API PluginController::initialize(FUnknown* context)
 tresult PLUGIN_API PluginController::terminate()
 {
     return EditController::terminate();
+}
+
+tresult PLUGIN_API PluginController::setState(IBStream *state)
+{
+    if (!state)
+        return kResultFalse;
+
+    IBStreamer streamer(state, kLittleEndian);
+
+    if (!streamer.readDouble(bypassState))
+        return kResultFalse;
+
+    // Update the parameter in the controller
+    setParamNormalized(kParamBypass, bypassState);
+
+    return kResultOk;
+}
+
+tresult PLUGIN_API PluginController::getState(IBStream *state)
+{
+    if (!state)
+        return kResultFalse;
+
+    IBStreamer streamer(state, kLittleEndian);
+
+    bypassState = getParamNormalized(kParamBypass);
+
+    if (!streamer.writeDouble(bypassState))
+        return kResultFalse;
+
+    return kResultOk;
 }

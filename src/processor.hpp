@@ -35,5 +35,6 @@ public:
     tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
 private:
     std::vector<std::unique_ptr<FFTProcessor>>  fft_processors_;
+    ParamValue bypassState = 0.0f;
 };
 #endif //PROCESSOR_HPP

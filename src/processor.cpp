@@ -2,8 +2,12 @@
 // Created by Darek Rudiš on 20.03.2025.
 //
 #include "processor.hpp"
+#include "controller.hpp"
 
 #include <sys/proc.h>
+
+#include "base/source/fstreamer.h"
+#include "vst/ivstparameterchanges.h"
 
 tresult PLUGIN_API PluginProcessor::initialize(FUnknown *context)
 {
@@ -79,11 +83,26 @@ tresult PLUGIN_API PluginProcessor::terminate()
 
 tresult PluginProcessor::setState(IBStream *state)
 {
+    if (!state)
+        return kResultFalse;
+
+    IBStreamer streamer(state, kLittleEndian);
+
+    if (!streamer.readDouble(bypassState))
+        return kResultFalse;
     return kResultOk;
 }
 
 tresult PluginProcessor::getState(IBStream *state)
 {
+    if (!state)
+        return kResultFalse;
+
+    IBStreamer streamer(state, kLittleEndian);
+
+    if (!streamer.writeDouble(bypassState))
+        return kResultFalse;
+
     return kResultOk;
 }
 

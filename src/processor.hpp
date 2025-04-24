@@ -34,6 +34,7 @@ public:
     tresult PLUGIN_API setState(IBStream* state) SMTG_OVERRIDE;
     tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
 private:
+    bool getBypassState(const ProcessData& data) const;
     std::vector<std::unique_ptr<FFTProcessor>>  fft_processors_;
     ParamValue bypassState = 0.0f;
 };

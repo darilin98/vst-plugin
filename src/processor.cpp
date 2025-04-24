@@ -66,6 +66,31 @@ tresult PLUGIN_API PluginProcessor::process(ProcessData& data)
     return kResultOk;
 }
 
+bool PluginProcessor::getBypassState(const ProcessData &data) const
+{
+    bool bypassActive = bypassState == 1.0f;  // Default to current stored state
+
+    if (auto* pc = data.inputParameterChanges) {
+        for (int32 i = 0; i < pc->getParameterCount(); ++i) {
+            if (auto* queue = pc->getParameterData(i)) {
+                if (queue->getParameterId() == kParamBypass) {
+                    int32 sampleOffset;
+                    ParamValue value;
+                    if (queue->getPoint(queue->getPointCount() - 1, sampleOffset, value) == kResultTrue) {
+                        if (!bypassActive && value == 1.0f) {
+                            for (auto& fft : fft_processors_)
+                                if (fft) fft->reset();
+                        }
+                        bypassActive = value == 1.0f;
+                        const_cast<PluginProcessor*>(this)->bypassState = value;
+                    }
+                }
+            }
+        }
+    }
+    return bypassActive;
+}
+
 tresult PLUGIN_API PluginProcessor::getControllerClassId(TUID classId)
 {
     if (!classId)

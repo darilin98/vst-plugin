@@ -45,14 +45,25 @@ tresult PLUGIN_API PluginProcessor::process(ProcessData& data)
     if (!(data.numInputs > 0 && data.inputs[0].numChannels > 0))
         return kResultOk;
 
+    bool isBypass = getBypassState(data);
+
     const int32 numSamples = data.numSamples;
-    if (numSamples == 0)
-        return kResultOk;
-
     const float sampleRate = this->processSetup.sampleRate;
-
     const int32 numChannels = std::min(data.inputs[0].numChannels, static_cast<int32>(fft_processors_.size()));
 
+    if (isBypass)
+    {
+        for (int32 ch = 0; ch < numChannels; ++ch)
+        {
+            float* input = data.inputs[0].channelBuffers32[ch];
+            float* output = data.outputs[0].channelBuffers32[ch];
+
+            if (input && output) {
+                std::copy(input, input + numSamples, output);
+            }
+        }
+        return kResultOk;
+    }
     for (int32 ch = 0; ch < numChannels; ++ch)
     {
         float* input = data.inputs[0].channelBuffers32[ch];

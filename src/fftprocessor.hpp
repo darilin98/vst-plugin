@@ -18,6 +18,7 @@ public:
     FFTProcessor();
     ~FFTProcessor();
     void prepare(int32_t fft_size);
+    void reset();
     void process(float* input, float* output, float sample_rate, Steinberg::int32 num_samples);
 private:
     int fft_size_; ///< Should be 2^n

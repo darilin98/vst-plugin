@@ -2,6 +2,7 @@
 // Created by Darek Rudiš on 11.04.2025.
 //
 #include "fftprocessor.hpp"
+#include <ranges>
 
 FFTProcessor::FFTProcessor()
 : fft_size_(0)
@@ -43,6 +44,14 @@ void FFTProcessor::prepare(int32_t fft_size)
     overlap_add_buffer_.resize(fft_size_ + hop_size_, 0.0f);
     write_pos_ = 0;
 }
+
+void FFTProcessor::reset()
+{
+    std::ranges::fill(overlap_add_buffer_, 0.0f);
+    std::ranges::fill(input_buffer_, 0.0f);
+    write_pos_ = 0;
+}
+
 
 void FFTProcessor::process(float *input, float *output, float sample_rate, Steinberg::int32 num_samples)
 {

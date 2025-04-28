@@ -47,6 +47,8 @@ set(SOURCES
         processor.hpp
         fftprocessor.hpp
         fftprocessor.cpp
+        equalizer.hpp
+        equalizer.cpp
 )
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")

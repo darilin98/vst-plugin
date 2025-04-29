@@ -17,3 +17,7 @@
 - [x] Try to use window function in the FFT process
 
 - Connect user parameters with audio process method
+
+- Create polynomial EQ
+
+- Add fade in/out for bypass

@@ -1,6 +1,10 @@
 //
 // Created by Darek Rudiš on 25.04.2025.
 //
+
+#ifndef EQUALIZER_HPP
+#define EQUALIZER_HPP
+
 #include "fftw3.h"
 #include "base/ftypes.h"
 #include "vst/ivstparameterchanges.h"
@@ -14,13 +18,19 @@ class Equalizer {
 public:
     virtual ~Equalizer() = default;
 
-    virtual void modulate(fftw_complex* freq_bins, int fft_size, int sample_size) = 0;
+    virtual void modulate(fftwf_complex* freq_bins, int fft_size, int sample_size) = 0;
+    virtual void update_params(ProcessData& data) = 0;
 
 };
 
 class PolynomialEqualizer : public Equalizer {
 public:
-    void modulate(fftw_complex* freq_bins, int fft_size, int sample_rate) override;
+    void modulate(fftwf_complex* freq_bins, int fft_size, int sample_rate) override;
+    void update_params(ProcessData& data) override;
+private:
+    float param_shift_ = 1.0f;
+    float param_alpha_ = 1.0f;
+    float param_beta_ = 1.0f;
 };
 
 inline bool getParameterValue(ProcessData& data, CustomParamID id, ParamValue& outValue)

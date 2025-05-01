@@ -19,3 +19,14 @@ void PolynomialEqualizer::modulate(fftwf_complex *freq_bins, int fft_size, int s
         freq_bins[i][1] *= gain;  // imag part
     }
 }
+void PolynomialEqualizer::update_params(ProcessData& data)
+{
+    ParamValue temp_val;
+    if (getParameterValue(data, kParamShift, temp_val))
+        param_shift_ = static_cast<float>(temp_val);
+    if (getParameterValue(data, kParamAlpha, temp_val))
+        param_alpha_ = static_cast<float>(temp_val);
+    if (getParameterValue(data, kParamBeta, temp_val))
+        param_beta_ = static_cast<float>(temp_val);
+}
+

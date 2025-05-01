@@ -1,15 +1,16 @@
 //
 // Created by Darek Rudiš on 11.04.2025.
 //
+#ifndef FFTPROCESSOR_HPP
+#define FFTPROCESSOR_HPP
+
 #pragma once
 #include <fftw3.h>
 #include <algorithm>
 #include <vector>
 #include <chrono>
 #include "base/ftypes.h"
-
-#ifndef FFTPROCESSOR_HPP
-#define FFTPROCESSOR_HPP
+#include "equalizer.hpp"
 
 using array_t = std::vector<float>;
 
@@ -20,6 +21,7 @@ public:
     void prepare(int32_t fft_size);
     void reset();
     void process(float* input, float* output, float sample_rate, Steinberg::int32 num_samples);
+    void setEqualizer(std::weak_ptr<Equalizer> equalizer);
 private:
     int fft_size_; ///< Should be 2^n
     int hop_size_;
@@ -32,6 +34,7 @@ private:
     fftwf_complex* out_;
     fftwf_plan plan_fwd_;
     fftwf_plan plan_inv_;
+    std::weak_ptr<Equalizer> equalizer_;
 };
 
 #include <fstream>

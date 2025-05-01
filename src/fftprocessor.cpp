@@ -3,6 +3,7 @@
 //
 #include "fftprocessor.hpp"
 #include <ranges>
+#include <utility>
 
 FFTProcessor::FFTProcessor()
 : fft_size_(0)
@@ -22,6 +23,10 @@ FFTProcessor::~FFTProcessor()
     fftwf_free(in_);
     fftwf_free(out_);
     fftwf_free(processed_);
+}
+
+void FFTProcessor::setEqualizer(std::weak_ptr<Equalizer> equalizer) {
+    equalizer_ = std::move(equalizer);
 }
 
 void FFTProcessor::prepare(int32_t fft_size)
@@ -76,18 +81,8 @@ void FFTProcessor::process(float *input, float *output, float sample_rate, Stein
 
         fftwf_execute(plan_fwd_);
 
-        for (int i = 0; i < fft_size_ / 2 + 1; ++i) {
-            float freq = (i * sample_rate) / fft_size_;
-
-            float gain = 1.0f;
-            float cut_center = 600.0f, cut_width = 300.0f;
-            gain *= 1.0f - 0.9f * expf(-powf((freq - cut_center) / cut_width, 2.0f));
-
-            float boost_center = 4500.0f, boost_width = 800.0f;
-            gain *= 1.0f + 5.0f * expf(-powf((freq - boost_center) / boost_width, 2.0f));
-
-            out_[i][0] *= gain;  // real part
-            out_[i][1] *= gain;  // imag part
+        if (auto eq = equalizer_.lock()) {
+            eq->modulate(out_, fft_size_, static_cast<int>(sample_rate));
         }
 
         fftwf_execute(plan_inv_);

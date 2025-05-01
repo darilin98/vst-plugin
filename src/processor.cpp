@@ -25,6 +25,8 @@ tresult PLUGIN_API PluginProcessor::setupProcessing(ProcessSetup &setup)
     if(result != kResultOk)
         return result;
 
+    equalizer_ = std::make_shared<PolynomialEqualizer>(); // Temporary only singe equalizer
+
     BusInfo busInfo;
     if (getBusInfo(kAudio, kInput, 0, busInfo) == kResultOk)
     {
@@ -35,6 +37,7 @@ tresult PLUGIN_API PluginProcessor::setupProcessing(ProcessSetup &setup)
         {
             fft_processors_[i] = std::make_unique<FFTProcessor>();
             fft_processors_[i]->prepare(FFT_SIZE);
+            fft_processors_[i]->setEqualizer(equalizer_);
         }
     }
     return kResultOk;
@@ -46,6 +49,8 @@ tresult PLUGIN_API PluginProcessor::process(ProcessData& data)
         return kResultOk;
 
     bool isBypass = getBypassState(data);
+
+    equalizer_->update_params(data);
 
     const int32 numSamples = data.numSamples;
     const float sampleRate = this->processSetup.sampleRate;

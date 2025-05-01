@@ -7,6 +7,7 @@
 
 #include "public.sdk/source/vst/vstaudioeffect.h"
 #include "pluginterfaces/base/ustring.h"
+#include "equalizer.hpp"
 #include "fftprocessor.hpp"
 #include <vector>
 
@@ -37,5 +38,6 @@ private:
     bool getBypassState(const ProcessData& data) const;
     std::vector<std::unique_ptr<FFTProcessor>>  fft_processors_;
     ParamValue bypassState = 0.0f;
+    std::shared_ptr<Equalizer> equalizer_;
 };
 #endif //PROCESSOR_HPP

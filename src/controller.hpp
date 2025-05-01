@@ -10,9 +10,12 @@
 using namespace Steinberg::Vst;
 using namespace Steinberg;
 
-enum ParamID {
+enum CustomParamID {
     kParamGain = 100,
-    kParamBypass = 101
+    kParamBypass = 101,
+    kParamShift,
+    kParamAlpha,
+    kParamBeta,
 };
 
 class PluginController : public EditController

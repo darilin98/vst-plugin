@@ -8,7 +8,6 @@
 #include <fftw3.h>
 #include <algorithm>
 #include <vector>
-#include <chrono>
 #include "base/ftypes.h"
 #include "equalizer.hpp"
 
@@ -36,14 +35,4 @@ private:
     fftwf_plan plan_inv_;
     std::weak_ptr<Equalizer> equalizer_;
 };
-
-#include <fstream>
-
-inline void log_debug(const std::string& msg)
-{
-    auto now = std::chrono::system_clock::now();
-    std::string formatted_time = std::format("{0:%F_%T}", now);
-    std::ofstream log("/Users/darek/Documents/vst3_debug_log.txt", std::ios::app);
-    log << formatted_time << ": "<< msg << std::endl;
-}
 #endif //FFTPROCESSOR_HPP

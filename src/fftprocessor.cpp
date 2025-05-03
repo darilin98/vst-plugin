@@ -25,8 +25,8 @@ FFTProcessor::~FFTProcessor()
     fftwf_free(processed_);
 }
 
-void FFTProcessor::setEqualizer(std::weak_ptr<Equalizer> equalizer) {
-    equalizer_ = std::move(equalizer);
+void FFTProcessor::setEqualizer(std::shared_ptr<Equalizer> equalizer) {
+    equalizer_ = equalizer;
 }
 
 void FFTProcessor::prepare(int32_t fft_size)
@@ -81,8 +81,8 @@ void FFTProcessor::process(float *input, float *output, float sample_rate, Stein
 
         fftwf_execute(plan_fwd_);
 
-        if (auto eq = equalizer_.lock()) {
-            eq->modulate(out_, fft_size_, static_cast<int>(sample_rate));
+        if (equalizer_) {
+            equalizer_->modulate(out_, fft_size_, static_cast<int>(sample_rate));
         }
 
         fftwf_execute(plan_inv_);

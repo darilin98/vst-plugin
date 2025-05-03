@@ -10,6 +10,7 @@
 #include "vst/ivstparameterchanges.h"
 #include "public.sdk/source/vst/vstaudioeffect.h"
 #include "controller.hpp"
+#include "utils.hpp"
 
 using namespace Steinberg::Vst;
 using namespace Steinberg;
@@ -43,7 +44,7 @@ inline bool getParameterValue(ProcessData& data, CustomParamID id, ParamValue& o
         if (queue && queue->getParameterId() == id)
         {
             int32 sampleOffset;
-            if (queue->getPoint(queue->getPointCount() - 1, sampleOffset, outValue))
+            if (queue->getPoint(queue->getPointCount() - 1, sampleOffset, outValue) == kResultTrue)
                 return true;
         }
     }

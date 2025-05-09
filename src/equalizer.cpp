@@ -5,15 +5,24 @@
 
 void PolynomialEqualizer::modulate(fftwf_complex *freq_bins, int fft_size, int sample_rate)
 {
-    float centerFreq = 20000 * param_shift_;
-    float dBpeakGain = 12;
+    const float minFreq = 20.f;
+    const float maxFreq = sample_rate * 0.5f;
+
+    float centerFreq = expf( logf(minFreq) + param_shift_ * (logf(maxFreq) - logf(minFreq)) );
+    float flip = 1.0f - 2.0f * param_beta_;
+    float dBpeakGain = flip * param_alpha_ * 12.0f; //12 dB max boost
+
     for (int i = 0; i < fft_size / 2 + 1; ++i) {
         float freq = (i * sample_rate) / fft_size;
 
         float x = (freq - centerFreq) / centerFreq;
-        float dBgain = param_alpha_ * x * x + dBpeakGain;
 
-        float gain = powf(10.0f, dBgain / 20.0f);
+        float shape = 1.0f - x*x;
+        if (shape < 0.0f) shape = 0.0f;
+
+        float dBgain = dBpeakGain * shape;
+
+        float gain = powf(10.0f, dBgain * 0.05f);
 
         freq_bins[i][0] *= gain;  // real part
         freq_bins[i][1] *= gain;  // imag part

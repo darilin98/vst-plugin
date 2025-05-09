@@ -29,9 +29,10 @@ public:
     void modulate(fftwf_complex* freq_bins, int fft_size, int sample_rate) override;
     void update_params(ProcessData& data) override;
 private:
-    float param_shift_ = 1.0f;
-    float param_alpha_ = 1.0f;
-    float param_beta_ = 1.0f;
+    float param_shift_ = 0.5f;
+    float param_intensity_ = 1.0f;
+    float param_direction_ = 0.0f;
+    float param_width_ = 0.0f;
 };
 
 inline bool getParameterValue(ProcessData& data, CustomParamID id, ParamValue& outValue)

@@ -4,9 +4,11 @@
 #include "controller.hpp"
 
 #include "base/source/fstreamer.h"
+#include "vstgui/lib/vstguiinit.h"
 
 tresult PLUGIN_API PluginController::initialize(FUnknown* context)
 {
+    VSTGUI::init(getPlatformModuleHandle());
     tresult result = EditController::initialize(context);
     if (result != kResultOk)
         return result;
@@ -57,4 +59,13 @@ tresult PLUGIN_API PluginController::getState(IBStream *state)
         return kResultFalse;
 
     return kResultOk;
+}
+
+IPlugView* PLUGIN_API PluginController::createView (FIDString name)
+{
+    if (strcmp (name, ViewType::kEditor) == 0)
+    {
+        return new VSTGUI::VST3Editor (this, "view", "myEditor.uidesc");
+    }
+    return nullptr;
 }

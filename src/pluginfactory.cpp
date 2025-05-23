@@ -15,6 +15,20 @@
 
 using namespace Steinberg::Vst;
 
+void* moduleHandle = nullptr;
+
+extern "C" bool InitModule(void* handle)
+{
+    moduleHandle = handle;
+    return true;
+}
+
+extern "C" bool DeinitModule()
+{
+    moduleHandle = nullptr;
+    return true;
+}
+
 extern "C" bool bundleEntry() {
     return true;
 }

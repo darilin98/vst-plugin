@@ -39,6 +39,8 @@ endif()
 # Set the VST3 SDK base directory
 set(VST3_SDK_PATH ${vst3sdk_SOURCE_DIR})
 
+include(${VST3_SDK_PATH}/cmake/modules/SMTG_VstGuiSupport.cmake)
+
 set(SOURCES
         controller.cpp
         controller.hpp
@@ -50,6 +52,8 @@ set(SOURCES
         equalizer.hpp
         equalizer.cpp
         utils.hpp
+
+        ${VST3_SDK_PATH}/public.sdk/source/main/moduleinit.cpp
 )
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
@@ -67,6 +71,7 @@ target_include_directories(vst-plugin PRIVATE
         ${VST3_SDK_PATH}
         ${VST3_SDK_PATH}/pluginterfaces
         ${VST3_SDK_PATH}/public.sdk/source/vst/
+        ${VST3_SDK_PATH}/vstgui4
         ${fftw_SOURCE_DIR}/api
         ${fftw_SOURCE_DIR}
         ${fftw_BINARY_DIR}
@@ -74,7 +79,11 @@ target_include_directories(vst-plugin PRIVATE
 
 target_link_libraries(vst-plugin PRIVATE sdk "-framework CoreFoundation"
                                          fftw3f
+                                         vstgui_support
 )
+
+target_compile_definitions(vst-plugin PUBLIC $<$<CONFIG:Debug>:VSTGUI_LIVE_EDITING=1>)
+
 
 # Define the output directory
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)

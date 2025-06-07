@@ -12,7 +12,7 @@
 using namespace Steinberg::Vst;
 using namespace Steinberg;
 
-enum CustomParamID {
+enum CustomParamID : ParamID{
     kParamBypass = 101,
     kParamShift,
     kParamIntensity,

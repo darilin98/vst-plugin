@@ -20,8 +20,6 @@ tresult PLUGIN_API PluginController::initialize(FUnknown* context)
     parameters.addParameter(STR16("Direction"), nullptr, 1, 0.0, ParameterInfo::kCanAutomate, kParamDirection);
     parameters.addParameter(STR16("Width"), nullptr, 0, 0.5, ParameterInfo::kCanAutomate, kParamWidth);
 
-
-
     return kResultOk;
 }
 
@@ -65,7 +63,7 @@ IPlugView* PLUGIN_API PluginController::createView (FIDString name)
 {
     if (strcmp (name, ViewType::kEditor) == 0)
     {
-        return new VSTGUI::VST3Editor (this, "view", "myEditor.uidesc");
+        return new VSTGUI::VST3Editor (this, "view", "viewGUI.uidesc");
     }
     return nullptr;
 }

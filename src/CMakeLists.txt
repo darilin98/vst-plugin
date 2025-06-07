@@ -9,7 +9,7 @@ include(FetchContent)
 # Fetch the VST3 SDK
 FetchContent_Declare(
         vst3sdk
-        GIT_REPOSITORY https://github.com/steinbergmedia/vst3sdk.git
+        GIT_REPOSITORY https://github.com/steinbergmedia/vst3sdk
         GIT_TAG master
 )
 FetchContent_MakeAvailable(vst3sdk)
@@ -97,6 +97,16 @@ set_target_properties(vst-plugin PROPERTIES
         MACOSX_BUNDLE TRUE
         OUTPUT_NAME "vst-plugin"
         MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/Info.plist"
+)
+
+set(UIDESC_SOURCE "${CMAKE_SOURCE_DIR}/viewGUI.uidesc")
+
+set(UIDESC_DESTINATION "${CMAKE_BINARY_DIR}/vst-plugin.vst3/Contents/Resources/viewGUI.uidesc")
+
+add_custom_command(TARGET vst-plugin POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${UIDESC_SOURCE}" "${UIDESC_DESTINATION}"
+        COMMENT "Copying .uidesc file into plugin bundle Resources"
 )
 
 # Create symlink

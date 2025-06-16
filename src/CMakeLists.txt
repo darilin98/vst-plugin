@@ -102,14 +102,18 @@ set_target_properties(vst-plugin PROPERTIES
 )
 
 set(UIDESC_SOURCE "${CMAKE_SOURCE_DIR}/viewGUI.uidesc")
-
 set(UIDESC_DESTINATION "${CMAKE_BINARY_DIR}/vst-plugin.vst3/Contents/Resources/viewGUI.uidesc")
 
-add_custom_command(TARGET vst-plugin POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${UIDESC_SOURCE}" "${UIDESC_DESTINATION}"
-        COMMENT "Copying .uidesc file into plugin bundle Resources"
+add_custom_command(
+        OUTPUT ${UIDESC_DESTINATION}
+        COMMAND ${CMAKE_COMMAND} -E copy ${UIDESC_SOURCE} ${UIDESC_DESTINATION}
+        DEPENDS ${UIDESC_SOURCE}
+        COMMENT "Copying .uidesc into plugin bundle Resources"
 )
+
+add_custom_target(copyUIDESC ALL DEPENDS ${UIDESC_DESTINATION})
+
+add_dependencies(vst-plugin copyUIDESC)
 
 # Create symlink
 install(CODE "

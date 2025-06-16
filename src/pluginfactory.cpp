@@ -15,6 +15,7 @@
 
 using namespace Steinberg::Vst;
 
+/*
 void* moduleHandle = nullptr;
 
 extern "C" bool InitModule(void* handle)
@@ -35,6 +36,7 @@ extern "C" bool bundleEntry() {
 
 extern "C" void bundleExit() {
 }
+*/
 
 BEGIN_FACTORY_DEF("MyCompany",
                   "https://mycompany.com",

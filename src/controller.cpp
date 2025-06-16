@@ -8,12 +8,14 @@
 
 tresult PLUGIN_API PluginController::initialize(FUnknown* context)
 {
-    VSTGUI::init(getPlatformModuleHandle());
+    //VSTGUI::init(getPlatformModuleHandle());
+    auto moduleHandle = getPlatformModuleHandle();
+    fprintf(stderr, "Module handle: %p\n", moduleHandle);
+    //VSTGUI::init(moduleHandle);
     tresult result = EditController::initialize(context);
     if (result != kResultOk)
         return result;
     parameters.removeAll();
-    // https://forums.steinberg.net/t/host-bypass-vst2-vs-vst3-explanation/201874?utm=true
     parameters.addParameter(STR16("Bypass"), nullptr, 1, 0.0, ParameterInfo::kIsBypass | ParameterInfo::kCanAutomate | ParameterInfo::kIsList, kParamBypass);
     parameters.addParameter(STR16("Shift"), nullptr, 0, 0.5, ParameterInfo::kCanAutomate, kParamShift);
     parameters.addParameter(STR16("Intensity"), nullptr, 0, 0.5, ParameterInfo::kCanAutomate, kParamIntensity);

@@ -53,6 +53,8 @@ set(SOURCES
         equalizer.cpp
         utils.hpp
 
+        ${VST3_SDK_PATH}/public.sdk/source/main/macmain.cpp
+
         ${VST3_SDK_PATH}/public.sdk/source/main/moduleinit.cpp
 )
 
@@ -82,7 +84,7 @@ target_link_libraries(vst-plugin PRIVATE sdk "-framework CoreFoundation"
                                          vstgui_support
 )
 
-target_compile_definitions(vst-plugin PUBLIC $<$<CONFIG:Debug>:VSTGUI_LIVE_EDITING=1>)
+target_compile_definitions(vst-plugin PUBLIC $<$<CONFIG:Debug>:VSTGUI_LIVE_EDITING=0>)
 
 
 # Define the output directory

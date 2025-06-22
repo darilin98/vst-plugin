@@ -43,7 +43,7 @@
 				"SplitViewSize_1_1": "0.5135951661631420472886588868277613073587",
 				"SplitViewSize_2_0": "0.7712363330529856675354949402390047907829",
 				"SplitViewSize_2_1": "0.2245584524810765314484228838409762829542",
-				"TabSwitchValue": "4",
+				"TabSwitchValue": "0",
 				"Version": "1",
 				"ViewBackground": "1"
 			},
@@ -52,7 +52,7 @@
 			},
 			"UIAttributesController": {},
 			"UIViewCreatorDataSource": {
-				"SelectedRow": "9"
+				"SelectedRow": "6"
 			},
 			"UITagsDataSource": {
 				"SelectedRow": "-1"
@@ -404,7 +404,7 @@
 							"text-inset": "0, 0",
 							"text-rotation": "0",
 							"text-shadow-offset": "1, 1",
-							"title": "Direction",
+							"title": "Boost/Cut",
 							"transparent": "false",
 							"value-precision": "2",
 							"wants-focus": "false",

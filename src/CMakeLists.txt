@@ -52,9 +52,10 @@ set(SOURCES
         equalizer.hpp
         equalizer.cpp
         utils.hpp
+        eqcurveview.hpp
+        eqcurveview.cpp
 
         ${VST3_SDK_PATH}/public.sdk/source/main/macmain.cpp
-
         ${VST3_SDK_PATH}/public.sdk/source/main/moduleinit.cpp
 )
 

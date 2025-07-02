@@ -16,7 +16,9 @@
 			}
 		},
 		"fonts": {},
-		"colors": {},
+		"colors": {
+			"Turq": "#4400bbff"
+		},
 		"gradients": {},
 		"control-tags": {
 			"Bypass": "101",
@@ -41,8 +43,8 @@
 				"SplitViewSize_0_1": "0.3141993957703927420332945530390134081244",
 				"SplitViewSize_1_0": "0.4818731117824773257929393821541452780366",
 				"SplitViewSize_1_1": "0.5135951661631420472886588868277613073587",
-				"SplitViewSize_2_0": "0.7712363330529856675354949402390047907829",
-				"SplitViewSize_2_1": "0.2245584524810765314484228838409762829542",
+				"SplitViewSize_2_0": "0.6122792262405383212353626731783151626587",
+				"SplitViewSize_2_1": "0.3835155592935239887708576134173199534416",
 				"TabSwitchValue": "0",
 				"Version": "1",
 				"ViewBackground": "1"
@@ -52,13 +54,13 @@
 			},
 			"UIAttributesController": {},
 			"UIViewCreatorDataSource": {
-				"SelectedRow": "6"
+				"SelectedRow": "5"
 			},
 			"UITagsDataSource": {
 				"SelectedRow": "-1"
 			},
 			"UIColorsDataSource": {
-				"SelectedRow": "-1"
+				"SelectedRow": "0"
 			},
 			"UIGradientsDataSource": {
 				"SelectedRow": "-1"
@@ -73,13 +75,13 @@
 		"templates": {
 			"view": {
 				"attributes": {
-					"background-color": "~ BlueCColor",
+					"background-color": "Turq",
 					"background-color-draw-style": "filled and stroked",
 					"class": "CViewContainer",
 					"mouse-enabled": "true",
 					"opacity": "1",
 					"origin": "0, 0",
-					"size": "300, 300",
+					"size": "564, 300",
 					"transparent": "false",
 					"wants-focus": "false"
 				},
@@ -446,6 +448,32 @@
 							"value-precision": "2",
 							"wants-focus": "false",
 							"wheel-inc-value": "0.1"
+						}
+					},
+					"CViewContainer": {
+						"attributes": {
+							"background-color": "~ BlackCColor",
+							"background-color-draw-style": "filled and stroked",
+							"class": "CViewContainer",
+							"mouse-enabled": "true",
+							"opacity": "1",
+							"origin": "312, 36",
+							"size": "220, 208",
+							"transparent": "false",
+							"wants-focus": "false"
+						},
+						"children": {
+							"EQCurveView": {
+								"attributes": {
+									"class": "EQCurveView",
+									"mouse-enabled": "true",
+									"opacity": "1",
+									"origin": "0, 0",
+									"size": "220, 208",
+									"transparent": "false",
+									"wants-focus": "false"
+								}
+							}
 						}
 					}
 				}

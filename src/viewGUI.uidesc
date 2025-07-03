@@ -457,8 +457,8 @@
 							"class": "CViewContainer",
 							"mouse-enabled": "true",
 							"opacity": "1",
-							"origin": "312, 36",
-							"size": "220, 208",
+							"origin": "310, 20",
+							"size": "220, 220",
 							"transparent": "false",
 							"wants-focus": "false"
 						},
@@ -469,7 +469,7 @@
 									"mouse-enabled": "true",
 									"opacity": "1",
 									"origin": "0, 0",
-									"size": "220, 208",
+									"size": "220, 220",
 									"transparent": "false",
 									"wants-focus": "false"
 								}

@@ -34,13 +34,17 @@ void PolynomialEqualizer::modulate(fftwf_complex *freq_bins, int fft_size, int s
 void PolynomialEqualizer::update_params(ProcessData& data)
 {
     ParamValue temp_val;
-    if (getParameterValue(data, kParamShift, temp_val))
-        param_shift_ = static_cast<float>(temp_val);
-    if (getParameterValue(data, kParamIntensity, temp_val))
-        param_intensity_ = static_cast<float>(temp_val);
-    if (getParameterValue(data, kParamDirection, temp_val))
-        param_direction_ = static_cast<float>(temp_val);
-    if (getParameterValue(data, kParamWidth, temp_val))
-        param_width_ = static_cast<float>(temp_val);
+
+    auto tryUpdate = [&](CustomParamID id, float& param) {
+        if (getParameterValue(data, id, temp_val)) {
+            param = static_cast<float>(temp_val);
+        }
+    };
+
+    tryUpdate(kParamShift,param_shift_);
+    tryUpdate(kParamIntensity,param_intensity_);
+    tryUpdate(kParamDirection,param_direction_);
+    tryUpdate(kParamWidth,param_width_);
+
 }
 

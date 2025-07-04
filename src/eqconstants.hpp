@@ -10,6 +10,7 @@ namespace EQ {
     constexpr float maxFreq = 20000.0f;
 
     constexpr float dBMaxBoost = 12.0f;
+
     constexpr float kDefaultShift = 0.5f;
     constexpr float kDefaultIntensity = 0.5f;
     constexpr float kDefaultDirection = 0.0f;

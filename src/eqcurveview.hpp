@@ -16,11 +16,13 @@
 
 class EQCurveView : public VSTGUI::CView {
 public:
-    EQCurveView(const VSTGUI::CRect& size)
+    explicit EQCurveView(const VSTGUI::CRect& size)
         : CView(size) { }
 
     void draw(VSTGUI::CDrawContext* dc) override;
-
+private:
+    [[nodiscard]] float freqToX(float freq) const;
+    [[nodiscard]] float dbToY(float db) const;
 };
 
 namespace VSTGUI {

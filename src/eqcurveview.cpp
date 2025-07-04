@@ -12,27 +12,58 @@ void EQCurveView::draw(VSTGUI::CDrawContext* dc)
     dc->setLineWidth(2);
     dc->setFrameColor(VSTGUI::CColor(0, 255, 0, 255));
 
-    const auto width = getWidth();
-    const auto height = getHeight();
-    std::vector<VSTGUI::CPoint> points;
+    // hardcoded params for now
+    float shift = 0.5f;
+    float intensity = 1.0f;
+    float direction = 0.0f;
+    float width = 0.5f;
 
-    for (int x = 0; x < static_cast<int>(width); ++x)
-    {
-        float normX = static_cast<float>(x) / width;
 
-        // hard coded for now
-        float shape = -powf(normX, 4.0f) + powf(normX, 3.0f) + powf(normX, 2.0f) + 0.5f;
-        float y = (1.0f - shape) * height;
-        points.emplace_back(static_cast<float>(x), y);
-    }
+    float centerFreq = expf(logf(EQ::minFreq) + shift * (logf(EQ::maxFreq) - logf(EQ::minFreq)));
+    float flip = 1.0f - 2.0f * direction;
+    float dBpeakGain = flip * intensity * EQ::dBMaxBoost;
+
     auto path = dc->createGraphicsPath();
-    path->beginSubpath(points[0]);
-    for (int i = 1; i < points.size(); ++i) {
-        path->addLine(points[i]);
+
+    const int numPoints = static_cast<int>(getWidth());
+    for (int i = 0; i < numPoints; ++i)
+    {
+        float normX = static_cast<float>(i) / numPoints;
+        float logFreq = log10f(EQ::minFreq) + normX * (log10f(EQ::maxFreq) - log10f(EQ::minFreq));
+        float freq = powf(10.0f, logFreq);
+
+        float x = (freq - centerFreq) / (centerFreq * width);
+        // TODO remove hardcoded shape
+        float shape = -powf(x, 4.0f) + powf(x, 3.0f) + powf(x, 2.0f) + 0.5f;
+        if (shape < 0.0f) shape = 0.0f;
+
+        float dBgain = dBpeakGain * shape;
+
+        float px = freqToX(freq);
+        float py = dbToY(dBgain);
+
+        if (i == 0)
+            path->beginSubpath({px, py});
+        else
+            path->addLine({px, py});
     }
+
+    dc->drawGraphicsPath(path, VSTGUI::CDrawContext::kPathStroked);
     dc->drawGraphicsPath(path, VSTGUI::CDrawContext::kPathStroked);
     path->forget();
     // TODO trigger invalid state upon param change
     //dc->drawLine(VSTGUI::CPoint(0, getHeight() / 2), VSTGUI::CPoint(getWidth(), getHeight() / 2));
 }
 
+float EQCurveView::freqToX(const float freq) const
+{
+    float normX = (log10f(freq) - log10f(EQ::minFreq))/ (log10f(EQ::maxFreq) - log10f(EQ::minFreq));
+    return normX * getWidth();
+}
+
+float EQCurveView::dbToY(const float db) const
+{
+    const float padding = 20.0f;
+    float normY = (EQ::dBMaxBoost + padding - db) / (2 * EQ::dBMaxBoost + padding);
+    return normY * getHeight();
+}

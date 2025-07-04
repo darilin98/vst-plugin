@@ -11,6 +11,7 @@
 #include "public.sdk/source/vst/vstaudioeffect.h"
 #include "controller.hpp"
 #include "utils.hpp"
+#include "eqconstants.hpp"
 
 using namespace Steinberg::Vst;
 using namespace Steinberg;
@@ -29,10 +30,10 @@ public:
     void modulate(fftwf_complex* freq_bins, int fft_size, int sample_rate) override;
     void update_params(ProcessData& data) override;
 private:
-    float param_shift_ = 0.5f;
-    float param_intensity_ = 1.0f;
-    float param_direction_ = 0.0f;
-    float param_width_ = 0.0f;
+    float param_shift_ = EQ::kDefaultShift;
+    float param_intensity_ = EQ::kDefaultIntensity;
+    float param_direction_ = EQ::kDefaultDirection;
+    float param_width_ = EQ::kDefaultWidth;
 };
 
 inline bool getParameterValue(ProcessData& data, CustomParamID id, ParamValue& outValue)

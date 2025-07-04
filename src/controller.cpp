@@ -17,10 +17,10 @@ tresult PLUGIN_API PluginController::initialize(FUnknown* context)
         return result;
     parameters.removeAll();
     parameters.addParameter(STR16("Bypass"), nullptr, 1, 0.0, ParameterInfo::kIsBypass | ParameterInfo::kCanAutomate | ParameterInfo::kIsList, kParamBypass);
-    parameters.addParameter(STR16("Shift"), nullptr, 0, 0.5, ParameterInfo::kCanAutomate, kParamShift);
-    parameters.addParameter(STR16("Intensity"), nullptr, 0, 0.5, ParameterInfo::kCanAutomate, kParamIntensity);
-    parameters.addParameter(STR16("Direction"), nullptr, 1, 0.0, ParameterInfo::kCanAutomate, kParamDirection);
-    parameters.addParameter(STR16("Width"), nullptr, 0, 0.5, ParameterInfo::kCanAutomate, kParamWidth);
+    parameters.addParameter(STR16("Shift"), nullptr, 0, EQ::kDefaultShift, ParameterInfo::kCanAutomate, kParamShift);
+    parameters.addParameter(STR16("Intensity"), nullptr, 0, EQ::kDefaultIntensity, ParameterInfo::kCanAutomate, kParamIntensity);
+    parameters.addParameter(STR16("Direction"), nullptr, 1, EQ::kDefaultDirection, ParameterInfo::kCanAutomate, kParamDirection);
+    parameters.addParameter(STR16("Width"), nullptr, 0, EQ::kDefaultWidth, ParameterInfo::kCanAutomate, kParamWidth);
 
     return kResultOk;
 }

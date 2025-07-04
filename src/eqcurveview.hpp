@@ -5,6 +5,7 @@
 #ifndef EQCURVEVIEW_HPP
 #define EQCURVEVIEW_HPP
 
+#include "eqconstants.hpp"
 #include "vstgui/lib/cview.h"
 #include "vstgui/uidescription/iuidescription.h"
 #include "vstgui/uidescription/iviewcreator.h"

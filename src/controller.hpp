@@ -8,6 +8,7 @@
 #include "public.sdk/source/vst/vsteditcontroller.h"
 #include "vstgui4/vstgui/plugin-bindings/vst3editor.h"
 #include "public.sdk/source/main/moduleinit.h"
+#include "eqconstants.hpp"
 
 using namespace Steinberg::Vst;
 using namespace Steinberg;

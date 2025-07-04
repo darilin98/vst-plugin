@@ -5,9 +5,9 @@
 
 void PolynomialEqualizer::modulate(fftwf_complex *freq_bins, int fft_size, int sample_rate)
 {
-    const float minFreq = 20.f;
+    constexpr float minFreq = EQ::minFreq;
     const float maxFreq = sample_rate * 0.5f; // Nyquist frequency
-    constexpr float dBMaxBoost = 12.0f;
+    constexpr float dBMaxBoost = EQ::dBMaxBoost;
 
     float centerFreq = expf( logf(minFreq) + param_shift_ * (logf(maxFreq) - logf(minFreq)) ); // Knob has a logarithmic feel -> converting back to linear
     float flip = 1.0f - 2.0f * param_direction_;

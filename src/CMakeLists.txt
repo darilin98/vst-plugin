@@ -9,7 +9,7 @@ include(FetchContent)
 # Fetch the VST3 SDK
 FetchContent_Declare(
         vst3sdk
-        GIT_REPOSITORY https://github.com/steinbergmedia/vst3sdk
+        GIT_REPOSITORY https://github.com/steinbergmedia/vst3sdk.git
         GIT_TAG master
 )
 FetchContent_MakeAvailable(vst3sdk)
@@ -54,6 +54,7 @@ set(SOURCES
         utils.hpp
         eqcurveview.hpp
         eqcurveview.cpp
+        eqconstants.hpp
 
         ${VST3_SDK_PATH}/public.sdk/source/main/macmain.cpp
         ${VST3_SDK_PATH}/public.sdk/source/main/moduleinit.cpp

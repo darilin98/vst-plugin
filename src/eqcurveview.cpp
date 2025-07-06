@@ -63,7 +63,10 @@ float EQCurveView::freqToX(const float freq) const
 
 float EQCurveView::dbToY(const float db) const
 {
-    const float padding = 20.0f;
-    float normY = (EQ::dBMaxBoost + padding - db) / (2 * EQ::dBMaxBoost + padding);
-    return normY * getHeight();
+    constexpr float padding = 20.0f;
+    constexpr float visualMaxDB = EQ::dBMaxBoost + 8.0f;
+    float drawableHeight = getHeight() - 2 * padding;
+
+    float normY = (visualMaxDB - db) / (2 * visualMaxDB);
+    return padding + normY * drawableHeight;
 }

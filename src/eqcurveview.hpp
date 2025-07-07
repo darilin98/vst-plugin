@@ -37,4 +37,22 @@ namespace VSTGUI {
     };
     static EQCurveViewCreator __gEQCurveViewCreator;
 }
+
+using param_t = Steinberg::Vst::Parameter*;
+using view_t = EQCurveView*;
+
+class CustomParamListener : public Steinberg::FObject {
+public:
+    CustomParamListener(param_t param, view_t view, controller_t controller);
+
+    ~CustomParamListener() override;
+
+    void PLUGIN_API update(Steinberg::FUnknown* changedUnknown, Steinberg::int32 message) override;
+
+private:
+    param_t _param;
+    view_t _view;
+    controller_t _controller;
+
+};
 #endif //EQCURVEVIEW_HPP

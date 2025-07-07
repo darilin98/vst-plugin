@@ -55,6 +55,7 @@ set(SOURCES
         eqcurveview.hpp
         eqcurveview.cpp
         eqconstants.hpp
+        paramlistener.cpp
 
         ${VST3_SDK_PATH}/public.sdk/source/main/macmain.cpp
         ${VST3_SDK_PATH}/public.sdk/source/main/moduleinit.cpp

@@ -4,7 +4,7 @@
 
 #include "eqcurveview.hpp"
 
-#include "vstgui/lib/cgraphicspath.h"
+#include "controller.hpp"
 
 void EQCurveView::draw(VSTGUI::CDrawContext* dc)
 {
@@ -12,16 +12,9 @@ void EQCurveView::draw(VSTGUI::CDrawContext* dc)
     dc->setLineWidth(2);
     dc->setFrameColor(VSTGUI::CColor(0, 255, 0, 255));
 
-    // hardcoded params for now
-    float shift = 0.5f;
-    float intensity = 1.0f;
-    float direction = 0.0f;
-    float width = 0.5f;
-
-
-    float centerFreq = expf(logf(EQ::minFreq) + shift * (logf(EQ::maxFreq) - logf(EQ::minFreq)));
-    float flip = 1.0f - 2.0f * direction;
-    float dBpeakGain = flip * intensity * EQ::dBMaxBoost;
+    float centerFreq = expf(logf(EQ::minFreq) + _shift * (logf(EQ::maxFreq) - logf(EQ::minFreq)));
+    float flip = 1.0f - 2.0f * _direction;
+    float dBpeakGain = flip * _intensity * EQ::dBMaxBoost;
 
     auto path = dc->createGraphicsPath();
 
@@ -32,7 +25,7 @@ void EQCurveView::draw(VSTGUI::CDrawContext* dc)
         float logFreq = log10f(EQ::minFreq) + normX * (log10f(EQ::maxFreq) - log10f(EQ::minFreq));
         float freq = powf(10.0f, logFreq);
 
-        float x = (freq - centerFreq) / (centerFreq * width);
+        float x = (freq - centerFreq) / (centerFreq * _width);
         // TODO remove hardcoded shape
         float shape = -powf(x, 4.0f) + powf(x, 3.0f) + powf(x, 2.0f) + 0.5f;
         if (shape < 0.0f) shape = 0.0f;
@@ -54,6 +47,41 @@ void EQCurveView::draw(VSTGUI::CDrawContext* dc)
     // TODO trigger invalid state upon param change
     //dc->drawLine(VSTGUI::CPoint(0, getHeight() / 2), VSTGUI::CPoint(getWidth(), getHeight() / 2));
 }
+
+void EQCurveView::setParamListeners(controller_t controller)
+{
+    this->_controller = controller;
+
+    _shiftListener = std::make_unique<CustomParamListener>(
+        _controller->getParameterObject(kParamShift), this, _controller);
+    _widthListener = std::make_unique<CustomParamListener>(
+        _controller->getParameterObject(kParamWidth), this, _controller);
+    _intensityListener = std::make_unique<CustomParamListener>(
+        _controller->getParameterObject(kParamIntensity), this, _controller);
+    _directionListener = std::make_unique<CustomParamListener>(
+        _controller->getParameterObject(kParamDirection), this, _controller);
+}
+
+void EQCurveView::onParamChanged(Steinberg::Vst::ParamID id, float normalizedValue)
+{
+    switch (id)
+    {
+        case kParamShift:
+            _shift = normalizedValue;
+        break;
+        case kParamWidth:
+            _width = normalizedValue;
+        break;
+        case kParamIntensity:
+            _intensity = normalizedValue;
+        break;
+        case kParamDirection:
+            _direction = normalizedValue;
+        break;
+    }
+}
+
+
 
 float EQCurveView::freqToX(const float freq) const
 {

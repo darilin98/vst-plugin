@@ -20,7 +20,8 @@ void PolynomialEqualizer::modulate(fftwf_complex *freq_bins, int fft_size, int s
         float x = (freq - centerFreq) / (centerFreq * param_width_);
 
         //float shape = 1.0f - x*x;
-        float shape = -powf(x, 4.0f) + powf(x, 3.0f) + powf(x, 2.0f) + 0.5f;
+        // float shape = -powf(x, 4.0f) + powf(x, 3.0f) + powf(x, 2.0f) + 0.5f;
+        float shape = shapeFromPreset(param_shape_, x);
         if (shape < 0.0f) shape = 0.0f;
 
         float dBgain = dBpeakGain * shape;
@@ -45,6 +46,13 @@ void PolynomialEqualizer::update_params(ProcessData& data)
     tryUpdate(kParamIntensity,param_intensity_);
     tryUpdate(kParamDirection,param_direction_);
     tryUpdate(kParamWidth,param_width_);
+
+    ParamValue shapeVal;
+    if (getParameterValue(data, kParamShape, shapeVal)) {
+        auto index = static_cast<int32>(shapeVal * static_cast<int32>(EqShapePreset::Count));
+        index = std::clamp(index, 0, static_cast<int32>(EqShapePreset::Count) - 1);
+        param_shape_ = static_cast<EqShapePreset>(index);
+    }
 
 }
 

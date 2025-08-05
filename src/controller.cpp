@@ -2,6 +2,7 @@
 // Created by Darek Rudiš on 20.03.2025.
 //
 #include "controller.hpp"
+#include "eqshape.hpp"
 
 #include "base/source/fstreamer.h"
 #include "vstgui/lib/vstguiinit.h"
@@ -21,6 +22,7 @@ tresult PLUGIN_API PluginController::initialize(FUnknown* context)
     parameters.addParameter(STR16("Intensity"), nullptr, 0, EQ::kDefaultIntensity, ParameterInfo::kCanAutomate, kParamIntensity);
     parameters.addParameter(STR16("Direction"), nullptr, 1, EQ::kDefaultDirection, ParameterInfo::kCanAutomate, kParamDirection);
     parameters.addParameter(STR16("Width"), nullptr, 0, EQ::kDefaultWidth, ParameterInfo::kCanAutomate, kParamWidth);
+    parameters.addParameter(STR16("Shape"), nullptr, EqShapePreset::Count, EqShape::kDefaultEqShape, ParameterInfo::kCanAutomate | ParameterInfo::kIsList, kParamShape);
 
     return kResultOk;
 }

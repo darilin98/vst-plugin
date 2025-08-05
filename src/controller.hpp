@@ -19,6 +19,7 @@ enum CustomParamID : ParamID{
     kParamIntensity,
     kParamDirection,
     kParamWidth,
+    kParamShape,
 };
 
 class PluginController : public EditController

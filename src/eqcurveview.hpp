@@ -8,6 +8,7 @@
 #include <memory>
 
 #include "eqconstants.hpp"
+#include "eqshape.hpp"
 #include "vstgui/lib/cview.h"
 #include "vstgui/uidescription/iuidescription.h"
 #include "vstgui/uidescription/iviewcreator.h"
@@ -43,11 +44,14 @@ private:
     listener_t _widthListener;
     listener_t _intensityListener;
     listener_t _directionListener;
+    listener_t _shapeListener;
 
     float _shift = EQ::kDefaultShift;
     float _width = EQ::kDefaultWidth;
     float _intensity = EQ::kDefaultIntensity;
     float _direction = EQ::kDefaultDirection;
+    EqShapePreset _shape = EqShape::kDefaultEqShape;
+
 };
 
 namespace VSTGUI {

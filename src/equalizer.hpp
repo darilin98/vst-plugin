@@ -12,6 +12,7 @@
 #include "controller.hpp"
 #include "utils.hpp"
 #include "eqconstants.hpp"
+#include "eqshape.hpp"
 
 using namespace Steinberg::Vst;
 using namespace Steinberg;
@@ -34,6 +35,7 @@ private:
     float param_intensity_ = EQ::kDefaultIntensity;
     float param_direction_ = EQ::kDefaultDirection;
     float param_width_ = EQ::kDefaultWidth;
+    EqShapePreset param_shape_ = EqShape::kDefaultEqShape;
 };
 
 inline bool getParameterValue(ProcessData& data, CustomParamID id, ParamValue& outValue)

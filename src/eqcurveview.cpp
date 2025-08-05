@@ -26,8 +26,7 @@ void EQCurveView::draw(VSTGUI::CDrawContext* dc)
         float freq = powf(10.0f, logFreq);
 
         float x = (freq - centerFreq) / (centerFreq * _width);
-        // TODO remove hardcoded shape
-        float shape = -powf(x, 4.0f) + powf(x, 3.0f) + powf(x, 2.0f) + 0.5f;
+        float shape = shapeFromPreset(_shape, x);
         if (shape < 0.0f) shape = 0.0f;
 
         float dBgain = dBpeakGain * shape;
@@ -44,8 +43,6 @@ void EQCurveView::draw(VSTGUI::CDrawContext* dc)
     dc->drawGraphicsPath(path, VSTGUI::CDrawContext::kPathStroked);
     dc->drawGraphicsPath(path, VSTGUI::CDrawContext::kPathStroked);
     path->forget();
-    // TODO trigger invalid state upon param change
-    //dc->drawLine(VSTGUI::CPoint(0, getHeight() / 2), VSTGUI::CPoint(getWidth(), getHeight() / 2));
 }
 
 void EQCurveView::setParamListeners(controller_t controller)
@@ -60,6 +57,8 @@ void EQCurveView::setParamListeners(controller_t controller)
         _controller->getParameterObject(kParamIntensity), this, _controller);
     _directionListener = std::make_unique<CustomParamListener>(
         _controller->getParameterObject(kParamDirection), this, _controller);
+    _shapeListener = std::make_unique<CustomParamListener>(
+        _controller->getParameterObject(kParamShape), this, _controller);
 }
 
 void EQCurveView::onParamChanged(Steinberg::Vst::ParamID id, float normalizedValue)
@@ -78,6 +77,12 @@ void EQCurveView::onParamChanged(Steinberg::Vst::ParamID id, float normalizedVal
         case kParamDirection:
             _direction = normalizedValue;
         break;
+        case kParamShape:
+        {
+            int shapeIndex = static_cast<int>(normalizedValue * static_cast<int>(EqShapePreset::Count));
+            _shape = static_cast<EqShapePreset>(shapeIndex);
+            break;
+        }
     }
 }
 

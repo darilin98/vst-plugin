@@ -23,7 +23,7 @@ inline float shapeFromPreset(const EqShapePreset preset, const float x) {
     switch (preset)
     {
         case Bell:
-            return powf(x, 2.0f);
+            return 1.0f - powf(x, 2.0f);
         case LeftRiser:
             // TODO Design shape
                 break;

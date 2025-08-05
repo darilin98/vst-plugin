@@ -35,6 +35,9 @@ public:
     tresult PLUGIN_API terminate() SMTG_OVERRIDE;
     tresult PLUGIN_API getState(IBStream *state) SMTG_OVERRIDE;
     tresult PLUGIN_API setState(IBStream*) SMTG_OVERRIDE;
+    tresult PLUGIN_API getParamStringByValue(ParamID id, ParamValue valueNormalized, String128 string) SMTG_OVERRIDE;
+    tresult PLUGIN_API setParamNormalized(ParamID tag, ParamValue value) SMTG_OVERRIDE;
+
     ParamValue bypassState = 0.0;
 };
 #endif //CONTROLLER_HPP

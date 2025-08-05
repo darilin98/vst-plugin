@@ -24,6 +24,7 @@
 			"Bypass": "101",
 			"Direction": "104",
 			"Intensity": "103",
+			"Shape": "106",
 			"Shift": "102",
 			"Width": "105"
 		},
@@ -54,7 +55,7 @@
 			},
 			"UIAttributesController": {},
 			"UIViewCreatorDataSource": {
-				"SelectedRow": "5"
+				"SelectedRow": "10"
 			},
 			"UITagsDataSource": {
 				"SelectedRow": "-1"
@@ -474,6 +475,78 @@
 									"wants-focus": "false"
 								}
 							}
+						}
+					},
+					"COptionMenu": {
+						"attributes": {
+							"back-color": "~ WhiteCColor",
+							"background-offset": "0, 0",
+							"class": "COptionMenu",
+							"control-tag": "Shape",
+							"font": "~ NormalFont",
+							"font-antialias": "true",
+							"font-color": "~ BlackCColor",
+							"frame-color": "~ BlackCColor",
+							"frame-width": "2",
+							"menu-check-style": "false",
+							"menu-popup-style": "false",
+							"opacity": "1",
+							"origin": "22, 160",
+							"round-rect-radius": "6",
+							"shadow-color": "~ RedCColor",
+							"size": "64, 20",
+							"style-3D-in": "false",
+							"style-3D-out": "false",
+							"style-no-draw": "false",
+							"style-no-frame": "false",
+							"style-no-text": "false",
+							"style-round-rect": "false",
+							"style-shadow-text": "false",
+							"text-alignment": "center",
+							"text-inset": "0, 0",
+							"text-rotation": "0",
+							"text-shadow-offset": "1, 1",
+							"transparent": "false",
+							"value-precision": "2",
+							"wants-focus": "true",
+							"wheel-inc-value": "0.1"
+						}
+					},
+					"CTextLabel": {
+						"attributes": {
+							"back-color": "~ TransparentCColor",
+							"background-offset": "0, 0",
+							"class": "CTextLabel",
+							"default-value": "0.5",
+							"font": "~ NormalFontBig",
+							"font-antialias": "true",
+							"font-color": "~ WhiteCColor",
+							"frame-color": "~ TransparentCColor",
+							"frame-width": "1",
+							"max-value": "1",
+							"min-value": "0",
+							"mouse-enabled": "true",
+							"opacity": "1",
+							"origin": "22, 205",
+							"round-rect-radius": "6",
+							"shadow-color": "~ BlackCColor",
+							"size": "70, 20",
+							"style-3D-in": "false",
+							"style-3D-out": "false",
+							"style-no-draw": "false",
+							"style-no-frame": "false",
+							"style-no-text": "false",
+							"style-round-rect": "false",
+							"style-shadow-text": "true",
+							"text-alignment": "center",
+							"text-inset": "0, 0",
+							"text-rotation": "0",
+							"text-shadow-offset": "1, 1",
+							"title": "Shape",
+							"transparent": "false",
+							"value-precision": "2",
+							"wants-focus": "false",
+							"wheel-inc-value": "0.1"
 						}
 					}
 				}

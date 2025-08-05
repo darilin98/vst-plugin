@@ -79,8 +79,11 @@ void EQCurveView::onParamChanged(Steinberg::Vst::ParamID id, float normalizedVal
         break;
         case kParamShape:
         {
-            int shapeIndex = static_cast<int>(normalizedValue * static_cast<int>(EqShapePreset::Count));
+            int maxShapeIndex = static_cast<int>(EqShapePreset::Count) - 1;
+            int shapeIndex = static_cast<int>(normalizedValue * maxShapeIndex + 0.5f);
+            shapeIndex = std::clamp(shapeIndex, 0, maxShapeIndex);
             _shape = static_cast<EqShapePreset>(shapeIndex);
+            fprintf(stderr, "Updating shape: %f (index=%d)\n", normalizedValue, shapeIndex);
             break;
         }
     }

@@ -37,12 +37,9 @@ namespace VSTGUI {
 
         fprintf(stderr, "Setting param ID %d to index %d (normalized = %f)\n", tag, selectedIndex, normalized);
 
-        menu->setValue(static_cast<float>(selectedIndex));
-        menu->invalid();
-
         _controller->setParamNormalized(tag, normalized);
 
-        fprintf(stderr, "Value now %f\n", param->getNormalized());
+        menu->setValue(static_cast<float>(selectedIndex));
 
         return true;
     }

@@ -39,13 +39,13 @@
 			},
 			"UIEditController": {
 				"EditViewScale": "1",
-				"EditorSize": "0, 0, 1189, 688",
-				"SplitViewSize_0_0": "0.6555891238670694676216044172178953886032",
-				"SplitViewSize_0_1": "0.3141993957703927420332945530390134081244",
-				"SplitViewSize_1_0": "0.4818731117824773257929393821541452780366",
-				"SplitViewSize_1_1": "0.5135951661631420472886588868277613073587",
-				"SplitViewSize_2_0": "0.6122792262405383212353626731783151626587",
-				"SplitViewSize_2_1": "0.3835155592935239887708576134173199534416",
+				"EditorSize": "0, 0, 1470, 891",
+				"SplitViewSize_0_0": "0.7364161849710982865602204583410639315844",
+				"SplitViewSize_0_1": "0.2404624277456647307715797978744376450777",
+				"SplitViewSize_1_0": "0.4861271676300578103990801537293009459972",
+				"SplitViewSize_1_1": "0.5104046242774566977118411159608513116837",
+				"SplitViewSize_2_0": "0.6095955569727891099063299407134763896465",
+				"SplitViewSize_2_1": "0.3870030824829931992425713360717054456472",
 				"TabSwitchValue": "0",
 				"Version": "1",
 				"ViewBackground": "1"
@@ -55,7 +55,7 @@
 			},
 			"UIAttributesController": {},
 			"UIViewCreatorDataSource": {
-				"SelectedRow": "10"
+				"SelectedRow": "18"
 			},
 			"UITagsDataSource": {
 				"SelectedRow": "-1"
@@ -477,41 +477,6 @@
 							}
 						}
 					},
-					"COptionMenu": {
-						"attributes": {
-							"back-color": "~ WhiteCColor",
-							"background-offset": "0, 0",
-							"class": "COptionMenu",
-							"control-tag": "Shape",
-							"font": "~ NormalFont",
-							"font-antialias": "true",
-							"font-color": "~ BlackCColor",
-							"frame-color": "~ BlackCColor",
-							"frame-width": "2",
-							"menu-check-style": "false",
-							"menu-popup-style": "false",
-							"opacity": "1",
-							"origin": "22, 160",
-							"round-rect-radius": "6",
-							"shadow-color": "~ RedCColor",
-							"size": "64, 20",
-							"style-3D-in": "false",
-							"style-3D-out": "false",
-							"style-no-draw": "false",
-							"style-no-frame": "false",
-							"style-no-text": "false",
-							"style-round-rect": "false",
-							"style-shadow-text": "false",
-							"text-alignment": "center",
-							"text-inset": "0, 0",
-							"text-rotation": "0",
-							"text-shadow-offset": "1, 1",
-							"transparent": "false",
-							"value-precision": "2",
-							"wants-focus": "true",
-							"wheel-inc-value": "0.1"
-						}
-					},
 					"CTextLabel": {
 						"attributes": {
 							"back-color": "~ TransparentCColor",
@@ -546,6 +511,41 @@
 							"transparent": "false",
 							"value-precision": "2",
 							"wants-focus": "false",
+							"wheel-inc-value": "0.1"
+						}
+					},
+					"PresetMenu": {
+						"attributes": {
+							"back-color": "~ WhiteCColor",
+							"background-offset": "0, 0",
+							"class": "PresetMenu",
+							"control-tag": "Shape",
+							"font": "~ NormalFontBig",
+							"font-antialias": "true",
+							"font-color": "~ BlackCColor",
+							"frame-color": "~ BlackCColor",
+							"frame-width": "2",
+							"menu-check-style": "false",
+							"menu-popup-style": "false",
+							"opacity": "1",
+							"origin": "22, 168",
+							"round-rect-radius": "6",
+							"shadow-color": "~ RedCColor",
+							"size": "70, 20",
+							"style-3D-in": "false",
+							"style-3D-out": "false",
+							"style-no-draw": "false",
+							"style-no-frame": "false",
+							"style-no-text": "false",
+							"style-round-rect": "true",
+							"style-shadow-text": "false",
+							"text-alignment": "center",
+							"text-inset": "0, 0",
+							"text-rotation": "0",
+							"text-shadow-offset": "1, 1",
+							"transparent": "false",
+							"value-precision": "2",
+							"wants-focus": "true",
 							"wheel-inc-value": "0.1"
 						}
 					}

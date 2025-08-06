@@ -26,7 +26,7 @@ inline float shapeFromPreset(const EqShapePreset preset, const float x) {
             return 1.0f - powf(x, 2.0f);
         case LeftRiser:
             // TODO Design shape
-            return 0.0f;
+            return 1.0f - powf(x, 3.0f) - powf(x, 2.0f) + powf(x, 5.0f);
         case Wave:
             return -powf(x, 4.0f) + powf(x, 3.0f) + powf(x, 2.0f) + 0.5f;
         default:

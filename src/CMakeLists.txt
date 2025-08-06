@@ -60,6 +60,8 @@ set(SOURCES
         ${VST3_SDK_PATH}/public.sdk/source/main/macmain.cpp
         ${VST3_SDK_PATH}/public.sdk/source/main/moduleinit.cpp
         eqshape.hpp
+        presetmenu.hpp
+        presetmenu.cpp
 )
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")

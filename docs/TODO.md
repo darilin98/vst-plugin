@@ -2,7 +2,7 @@
 
 (In no particular order of urgency)
 
-- Define libraries needed for the project
+- [x] Define libraries needed for the project
 
 - [x] Setup VST3 SDK empty project
 
@@ -12,12 +12,12 @@
 
 - [x] Link a project with the FFTW library
 
-- Research and gather information on Fourier transform
+- [x] Research and gather information on Fourier transform
 
 - [x] Try to use window function in the FFT process
 
-- Connect user parameters with audio process method
+- [x] Connect user parameters with audio process method
 
-- Create polynomial EQ
+- [x] Create polynomial EQ
 
 - Add fade in/out for bypass

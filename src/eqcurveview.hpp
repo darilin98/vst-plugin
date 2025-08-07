@@ -55,7 +55,7 @@ private:
     float _direction = EQ::kDefaultDirection;
     EqShapePreset _shape = EqShape::kDefaultEqShape;
 
-    constexpr float _padding = 20.0f;
+    const float _padding = 20.0f;
 
 };
 

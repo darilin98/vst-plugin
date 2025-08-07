@@ -38,6 +38,9 @@ public:
 private:
     [[nodiscard]] float freqToX(float freq) const;
     [[nodiscard]] float dbToY(float db) const;
+    void drawFreqMarkers(VSTGUI::CDrawContext* dc) const;
+    void drawDbMarkers(VSTGUI::CDrawContext* dc) const;
+
     controller_t _controller = nullptr;
 
     listener_t _shiftListener;
@@ -52,13 +55,15 @@ private:
     float _direction = EQ::kDefaultDirection;
     EqShapePreset _shape = EqShape::kDefaultEqShape;
 
+    constexpr float _padding = 20.0f;
+
 };
 
 namespace VSTGUI {
     struct EQCurveViewCreator : public ViewCreatorAdapter {
         EQCurveViewCreator() { UIViewFactory::registerViewCreator(*this); }
-        IdStringPtr getViewName() const override { return "EQCurveView"; }
-        IdStringPtr getBaseViewName() const override { return UIViewCreator::kCView; }
+        [[nodiscard]] IdStringPtr getViewName() const override { return "EQCurveView"; }
+        [[nodiscard]] IdStringPtr getBaseViewName() const override { return UIViewCreator::kCView; }
         CView* create(const UIAttributes& attr, const IUIDescription* d) const override {
             fprintf(stderr, "creating custom view");
             auto* view = new EQCurveView({0, 0, 100, 100});

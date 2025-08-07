@@ -80,7 +80,8 @@ tresult PLUGIN_API PluginController::getParamStringByValue(ParamID id, ParamValu
         switch (static_cast<EqShapePreset>(index)) {
             case EqShapePreset::Bell: name = "Bell"; break;
             case EqShapePreset::Wave: name = "Wave"; break;
-            case EqShapePreset::LeftRiser: name = "LeftRiser"; break;
+            case EqShapePreset::LeftRiser: name = "Left Riser"; break;
+            case EqShapePreset::TwoHills: name = "Two Hills"; break;
 
             default: name = "Unknown"; break;
         }

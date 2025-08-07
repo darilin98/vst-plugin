@@ -11,6 +11,7 @@ enum EqShapePreset  {
     Bell,
     Wave,
     LeftRiser,
+    TwoHills,
     // More shapes to be added
     Count
 };
@@ -22,13 +23,14 @@ namespace EqShape {
 inline float shapeFromPreset(const EqShapePreset preset, const float x) {
     switch (preset)
     {
-        case Bell:
-            return 1.0f - powf(x, 2.0f);
         case LeftRiser:
-            // TODO Design shape
-            return 1.0f - powf(x, 3.0f) - powf(x, 2.0f) + powf(x, 5.0f);
+            return 1.5f - powf(x, 2.0f);
+        case Bell:
+            return (expf(5.0f * x) - 1.0f) * (expf(5.0f * (1.0f - x)) - 1.0f)  / powf(expf(5.0f * 0.5f) - 1.0f, 2.0f);
         case Wave:
             return -powf(x, 4.0f) + powf(x, 3.0f) + powf(x, 2.0f) + 0.5f;
+        case TwoHills:
+            return -0.27f * powf(x, 4.0f) + 0.6f * powf(x, 3.0f) + 0.9f * powf(x, 2.0f) - x;
         default:
             return 0.0f;
     }

@@ -4,7 +4,13 @@
 #include "processor.hpp"
 #include "controller.hpp"
 
-#include <sys/proc.h>
+#if defined(__APPLE__)
+    #include <sys/proc.h>
+#elif defined(_WIN32)
+    #include <windows.h>
+    #include <tlhelp32.h>
+    #include <psapi.h>
+#endif
 
 #include "base/source/fstreamer.h"
 #include "vst/ivstparameterchanges.h"

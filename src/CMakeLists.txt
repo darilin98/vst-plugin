@@ -1,10 +1,21 @@
 cmake_minimum_required(VERSION 3.29)
-project(vst-plugin)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FetchContent)
+
+project(vst-plugin
+        VERSION 1.0.0
+        DESCRIPTION "Polynomial Equalizer"
+)
+
+#-------------------------------------------------------------------------------
+# Fetch Steinberg VST3 SDK
+#-------------------------------------------------------------------------------
+
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/Zc:char8_t->")
+set(SMTG_ENABLE_VST3_PLUGIN_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 # Fetch the VST3 SDK
 FetchContent_Declare(
@@ -14,32 +25,84 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(vst3sdk)
 
-FetchContent_Declare(
-    fftw
-    URL http://www.fftw.org/fftw-3.3.10.tar.gz
-)
-FetchContent_MakeAvailable(fftw)
+set(VST3_SDK_PATH ${vst3sdk_SOURCE_DIR})
+smtg_enable_vst3_sdk()
 
-set(ENABLE_STATIC ON CACHE BOOL "Build static FFTW")
-set(ENABLE_SHARED OFF CACHE BOOL "Disable shared FFTW")
+#-------------------------------------------------------------------------------
+# Fetch FFTW
+#-------------------------------------------------------------------------------
 
-set(ENABLE_FLOAT ON CACHE BOOL "Enable single precision (float) FFTW" FORCE)
-set(ENABLE_DOUBLE OFF CACHE BOOL "Disable double precision FFTW" FORCE)
-set(ENABLE_LONG_DOUBLE OFF CACHE BOOL "Disable long double FFTW" FORCE)
-set(ENABLE_SHARED OFF CACHE BOOL "Disable shared FFTW" FORCE)
-set(ENABLE_STATIC ON CACHE BOOL "Enable static FFTW" FORCE)
+if(APPLE)
 
-# Ensure FFTW builds
-FetchContent_GetProperties(fftw)
-if(NOT fftw_POPULATED)
-    FetchContent_Populate(fftw)
-    add_subdirectory(${fftw_SOURCE_DIR} ${fftw_BINARY_DIR})
+    set(ENABLE_FLOAT ON CACHE BOOL "Enable single precision (float) FFTW" FORCE)
+    set(ENABLE_DOUBLE OFF CACHE BOOL "Disable double precision FFTW" FORCE)
+    set(ENABLE_LONG_DOUBLE OFF CACHE BOOL "Disable long double FFTW" FORCE)
+    set(ENABLE_SHARED OFF CACHE BOOL "Disable shared FFTW" FORCE)
+    set(ENABLE_STATIC ON CACHE BOOL "Enable static FFTW" FORCE)
+
+    FetchContent_Declare(
+        fftw
+        URL http://www.fftw.org/fftw-3.3.10.tar.gz
+    )
+    FetchContent_MakeAvailable(fftw)
+
+    # Ensure FFTW builds
+    FetchContent_GetProperties(fftw)
+    if(NOT fftw_POPULATED)
+        FetchContent_Populate(fftw)
+        add_subdirectory(${fftw_SOURCE_DIR} ${fftw_BINARY_DIR})
+    endif()
+
+    set(FFTW_LIB_TARGET fftw3f)
+    set(FFTW_INCLUDE_DIRS
+            ${fftw_SOURCE_DIR}/api
+            ${fftw_SOURCE_DIR}
+            ${fftw_BINARY_DIR}
+    )
+
+elseif(WIN32)
+
+    FetchContent_Declare(
+            fftw
+            URL https://fftw.org/pub/fftw/fftw-3.3.5-dll64.zip
+    )
+    FetchContent_GetProperties(fftw)
+
+    if(NOT fftw_POPULATED)
+        FetchContent_Populate(fftw)
+    endif()
+
+    set(FFTW_WIN_ROOT ${fftw_SOURCE_DIR})
+
+    set(FFTW_DEF ${FFTW_WIN_ROOT}/libfftw3f-3.def)
+    set(FFTW_LIB ${FFTW_WIN_ROOT}/libfftw3f-3.lib)
+    set(FFTW_DLL ${FFTW_WIN_ROOT}/libfftw3f-3.dll)
+
+    add_custom_command(
+            OUTPUT ${FFTW_LIB}
+            COMMAND lib /def:${FFTW_DEF} /out:${FFTW_LIB} /machine:x64
+            DEPENDS ${FFTW_DEF}
+            COMMENT "Generating MSVC import library for FFTW3f"
+    )
+
+    add_custom_target(fftw3f_importlib ALL DEPENDS ${FFTW_LIB})
+
+    add_library(fftw3f SHARED IMPORTED)
+    add_dependencies(fftw3f fftw3f_importlib)
+
+    set_target_properties(fftw3f PROPERTIES
+            IMPORTED_LOCATION "${FFTW_DLL}"
+            IMPORTED_IMPLIB   "${FFTW_LIB}"
+            INTERFACE_INCLUDE_DIRECTORIES "${FFTW_WIN_ROOT}/"
+    )
+
+    set(FFTW_LIB_TARGET fftw3f)
+    set(FFTW_INCLUDE_DIRS "")
 endif()
 
-# Set the VST3 SDK base directory
-set(VST3_SDK_PATH ${vst3sdk_SOURCE_DIR})
-
-include(${VST3_SDK_PATH}/cmake/modules/SMTG_VstGuiSupport.cmake)
+#-------------------------------------------------------------------------------
+# Declare sources and ext. library directories
+#-------------------------------------------------------------------------------
 
 set(SOURCES
         controller.cpp
@@ -56,73 +119,78 @@ set(SOURCES
         eqcurveview.cpp
         eqconstants.hpp
         paramlistener.cpp
-
-        ${VST3_SDK_PATH}/public.sdk/source/main/macmain.cpp
-        ${VST3_SDK_PATH}/public.sdk/source/main/moduleinit.cpp
         eqshape.hpp
         presetmenu.hpp
         presetmenu.cpp
 )
 
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    add_definitions(-D_DEBUG)
-elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-    add_definitions(-DNDEBUG)
-else()
-    add_definitions(-DDEVELOPMENT)  # Default to DEVELOPMENT if not Debug/Release
-endif()
-
-# Define target
-add_library(vst-plugin MODULE ${SOURCES})
+smtg_add_vst3plugin(vst-plugin ${SOURCES})
 
 target_include_directories(vst-plugin PRIVATE
         ${VST3_SDK_PATH}
         ${VST3_SDK_PATH}/pluginterfaces
         ${VST3_SDK_PATH}/public.sdk/source/vst/
         ${VST3_SDK_PATH}/vstgui4
-        ${fftw_SOURCE_DIR}/api
-        ${fftw_SOURCE_DIR}
-        ${fftw_BINARY_DIR}
+        ${FFTW_INCLUDE_DIRS}
 )
 
-target_link_libraries(vst-plugin PRIVATE sdk "-framework CoreFoundation"
-                                         fftw3f
+
+target_link_libraries(vst-plugin PRIVATE sdk
+                                         ${FFTW_LIB_TARGET}
                                          vstgui_support
 )
 
-target_compile_definitions(vst-plugin PUBLIC $<$<CONFIG:Debug>:VSTGUI_LIVE_EDITING=0>)
+#-------------------------------------------------------------------------------
+# [WINDOWS] Copy dynamic fftw next to plugin binary
+#-------------------------------------------------------------------------------
 
+if(WIN32)
+    add_dependencies(vst-plugin fftw3f_importlib)
 
-# Define the output directory
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+    add_custom_command(TARGET vst-plugin PRE_LINK
+            COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:vst-plugin>"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${FFTW_DLL} "$<TARGET_FILE_DIR:vst-plugin>"
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/bin"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${FFTW_DLL}" "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
+
+#-------------------------------------------------------------------------------
+# Configure plugin output format
+#-------------------------------------------------------------------------------
+
+smtg_target_configure_version_file(vst-plugin)
 
 # Specify the plugin format, version, etc.
-set_target_properties(vst-plugin PROPERTIES
-        BUNDLE TRUE
-        BUNDLE_EXTENSION "vst3"
-        MACOSX_BUNDLE TRUE
-        OUTPUT_NAME "vst-plugin"
-        MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/Info.plist"
+if (APPLE)
+    set_target_properties(vst-plugin PROPERTIES
+            BUNDLE TRUE
+            BUNDLE_EXTENSION "vst3"
+            MACOSX_BUNDLE TRUE
+            OUTPUT_NAME "vst-plugin"
+            MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/Info.plist"
+    )
+elseif (WIN32)
+    target_sources(vst-plugin
+            PRIVATE
+            win32resource.rc
+    )
+    if(MSVC)
+        set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT vst-plugin)
+
+        smtg_target_set_debug_executable(vst-plugin
+                "$(ProgramW6432)/Steinberg/VST3PluginTestHost/VST3PluginTestHost.exe"
+                "--pluginfolder \"$(OutDir)/\""
+        )
+    endif()
+
+endif()
+
+#-------------------------------------------------------------------------------
+# Auto-copy view files
+#-------------------------------------------------------------------------------
+
+smtg_target_add_plugin_resources(vst-plugin
+        RESOURCES
+        "viewGUI.uidesc"
 )
-
-set(UIDESC_SOURCE "${CMAKE_SOURCE_DIR}/viewGUI.uidesc")
-set(UIDESC_DESTINATION "${CMAKE_BINARY_DIR}/vst-plugin.vst3/Contents/Resources/viewGUI.uidesc")
-
-add_custom_command(
-        OUTPUT ${UIDESC_DESTINATION}
-        COMMAND ${CMAKE_COMMAND} -E copy ${UIDESC_SOURCE} ${UIDESC_DESTINATION}
-        DEPENDS ${UIDESC_SOURCE}
-        COMMENT "Copying .uidesc into plugin bundle Resources"
-)
-
-add_custom_target(copyUIDESC ALL DEPENDS ${UIDESC_DESTINATION})
-
-add_dependencies(vst-plugin copyUIDESC)
-
-# Create symlink
-install(CODE "
-  execute_process(COMMAND ln -sf ${CMAKE_BINARY_DIR}/vst-plugin.vst3 \$ENV{HOME}/Library/Audio/Plug-Ins/VST3/vst-plugin.vst3)
-  message(STATUS \"Created symlink: \$ENV{HOME}/Library/Audio/Plug-Ins/VST3/vst-plugin.vst3 -> ${CMAKE_BINARY_DIR}/vst-plugin.vst3\")
-")

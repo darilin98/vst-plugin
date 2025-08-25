@@ -162,7 +162,7 @@ if (APPLE)
 elseif (WIN32)
     target_sources(vst-plugin
             PRIVATE
-            win32resource.rc
+            resources/win32resource.rc
     )
     if(MSVC)
         set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT vst-plugin)
@@ -181,7 +181,7 @@ endif()
 
 smtg_target_add_plugin_resources(vst-plugin
         RESOURCES
-        "Off_LED.png"
-        "on-off_LED.png"
-        "viewGUI.uidesc"
+        "resources/Off_LED.png"
+        "resources/on-off_LED.png"
+        "resources/viewGUI.uidesc"
 )

@@ -34,31 +34,23 @@ smtg_enable_vst3_sdk()
 
 if(APPLE)
 
-    set(ENABLE_FLOAT ON CACHE BOOL "Enable single precision (float) FFTW" FORCE)
-    set(ENABLE_DOUBLE OFF CACHE BOOL "Disable double precision FFTW" FORCE)
-    set(ENABLE_LONG_DOUBLE OFF CACHE BOOL "Disable long double FFTW" FORCE)
-    set(ENABLE_SHARED OFF CACHE BOOL "Disable shared FFTW" FORCE)
-    set(ENABLE_STATIC ON CACHE BOOL "Enable static FFTW" FORCE)
+    set(BUILD_SHARED_LIBS OFF CACHE BOOL "FFTW: build shared libraries" FORCE)
+    set(ENABLE_FLOAT ON CACHE BOOL "FFTW: build single-precision (float) library" FORCE)
+    set(ENABLE_LONG_DOUBLE OFF CACHE BOOL "FFTW: disable long double" FORCE)
+    set(ENABLE_QUAD_PRECISION OFF CACHE BOOL "FFTW: disable quad precision" FORCE)
+    set(BUILD_TESTS OFF CACHE BOOL "FFTW: don't build tests" FORCE)
+    set(CMAKE_POSITION_INDEPENDENT_CODE ON CACHE BOOL "Force PIC for static libraries" FORCE)
+    set(DISABLE_FORTRAN ON CACHE BOOL "FFTW: disable Fortran wrappers" FORCE)
+    set(ENABLE_THREADS OFF CACHE BOOL "FFTW: disable pthreads" FORCE)
+    set(ENABLE_OPENMP OFF CACHE BOOL "FFTW: disable OpenMP" FORCE)
 
     FetchContent_Declare(
-        fftw
-        URL http://www.fftw.org/fftw-3.3.10.tar.gz
+            fftw
+            URL http://www.fftw.org/fftw-3.3.10.tar.gz
     )
     FetchContent_MakeAvailable(fftw)
 
-    # Ensure FFTW builds
-    FetchContent_GetProperties(fftw)
-    if(NOT fftw_POPULATED)
-        FetchContent_Populate(fftw)
-        add_subdirectory(${fftw_SOURCE_DIR} ${fftw_BINARY_DIR})
-    endif()
-
-    set(FFTW_LIB_TARGET fftw3f)
-    set(FFTW_INCLUDE_DIRS
-            ${fftw_SOURCE_DIR}/api
-            ${fftw_SOURCE_DIR}
-            ${fftw_BINARY_DIR}
-    )
+    set(FFTW_INCLUDE_DIRS "${fftw_SOURCE_DIR}/api" "${fftw_SOURCE_DIR}" "${fftw_BINARY_DIR}")
 
 elseif(WIN32)
 
@@ -96,8 +88,8 @@ elseif(WIN32)
             INTERFACE_INCLUDE_DIRECTORIES "${FFTW_WIN_ROOT}/"
     )
 
-    set(FFTW_LIB_TARGET fftw3f)
     set(FFTW_INCLUDE_DIRS "")
+
 endif()
 
 #-------------------------------------------------------------------------------
@@ -136,7 +128,7 @@ target_include_directories(vst-plugin PRIVATE
 
 
 target_link_libraries(vst-plugin PRIVATE sdk
-                                         ${FFTW_LIB_TARGET}
+                                         fftw3f
                                          vstgui_support
 )
 
@@ -163,12 +155,9 @@ smtg_target_configure_version_file(vst-plugin)
 
 # Specify the plugin format, version, etc.
 if (APPLE)
-    set_target_properties(vst-plugin PROPERTIES
-            BUNDLE TRUE
-            BUNDLE_EXTENSION "vst3"
-            MACOSX_BUNDLE TRUE
-            OUTPUT_NAME "vst-plugin"
-            MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/Info.plist"
+    smtg_target_set_bundle(vst-plugin
+            BUNDLE_IDENTIFIER "github.com/darilin98/vst-plugin"
+            COMPANY_NAME "Darek Rudiš"
     )
 elseif (WIN32)
     target_sources(vst-plugin
@@ -192,5 +181,7 @@ endif()
 
 smtg_target_add_plugin_resources(vst-plugin
         RESOURCES
+        "Off_LED.png"
+        "on-off_LED.png"
         "viewGUI.uidesc"
 )

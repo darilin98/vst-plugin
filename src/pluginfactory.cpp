@@ -15,53 +15,30 @@
 
 using namespace Steinberg::Vst;
 
-/*
-void* moduleHandle = nullptr;
-
-extern "C" bool InitModule(void* handle)
-{
-    moduleHandle = handle;
-    return true;
-}
-
-extern "C" bool DeinitModule()
-{
-    moduleHandle = nullptr;
-    return true;
-}
-
-extern "C" bool bundleEntry() {
-    return true;
-}
-
-extern "C" void bundleExit() {
-}
-*/
-
-BEGIN_FACTORY_DEF("MyCompany",
-                  "https://mycompany.com",
-                  "mailto:contact@mycompany.com")
+BEGIN_FACTORY_DEF("Darek Rudiš",
+                  "https://github.com/darilin98",
+                  "darekrudis@email.cz")
 
     // Register the processor
     DEF_CLASS2(INLINE_UID_FROM_FUID(PluginProcessorUID),
                PClassInfo::kManyInstances, // multiple instances allowed
                kVstAudioEffectClass,       // Component category
-               "The Best Plugin Ever",      // Plugin name
+               "Polynomial Equalizer",      // Plugin name
                Vst::kDistributable,        // Distributable attribute
                "Fx|Synth",                 // Subcategories
                "1.0.0",                     // Version
-               "MyCompany",                // Vendor
+               "Darek Rudiš",                // Vendor
                PluginProcessor::createInstance)
 
     // Register the controller
     DEF_CLASS2(INLINE_UID_FROM_FUID(PluginControllerUID),
                PClassInfo::kManyInstances,
                kVstComponentControllerClass,
-               "My Plugin Controller",
+               "Polynomial Equalizer Controller",
                0,
                "",
                "1.0.0",
-               "MyCompany",
+               "Darek Rudiš",
                PluginController::createInstance)
 
 END_FACTORY

@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FetchContent)
 
-project(vst-plugin
+project(polynomial-eq
         VERSION 1.0.0
         DESCRIPTION "Polynomial Equalizer"
 )
@@ -116,9 +116,9 @@ set(SOURCES
         presetmenu.cpp
 )
 
-smtg_add_vst3plugin(vst-plugin ${SOURCES})
+smtg_add_vst3plugin(polynomial-eq ${SOURCES})
 
-target_include_directories(vst-plugin PRIVATE
+target_include_directories(polynomial-eq PRIVATE
         ${VST3_SDK_PATH}
         ${VST3_SDK_PATH}/pluginterfaces
         ${VST3_SDK_PATH}/public.sdk/source/vst/
@@ -127,7 +127,7 @@ target_include_directories(vst-plugin PRIVATE
 )
 
 
-target_link_libraries(vst-plugin PRIVATE sdk
+target_link_libraries(polynomial-eq PRIVATE sdk
                                          fftw3f
                                          vstgui_support
 )
@@ -137,11 +137,11 @@ target_link_libraries(vst-plugin PRIVATE sdk
 #-------------------------------------------------------------------------------
 
 if(WIN32)
-    add_dependencies(vst-plugin fftw3f_importlib)
+    add_dependencies(polynomial-eq fftw3f_importlib)
 
-    add_custom_command(TARGET vst-plugin PRE_LINK
-            COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:vst-plugin>"
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${FFTW_DLL} "$<TARGET_FILE_DIR:vst-plugin>"
+    add_custom_command(TARGET polynomial-eq PRE_LINK
+            COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_FILE_DIR:polynomial-eq>"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${FFTW_DLL} "$<TARGET_FILE_DIR:polynomial-eq>"
             COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/bin"
             COMMAND ${CMAKE_COMMAND} -E copy_if_different "${FFTW_DLL}" "${CMAKE_BINARY_DIR}/bin"
     )
@@ -151,23 +151,23 @@ endif()
 # Configure plugin output format
 #-------------------------------------------------------------------------------
 
-smtg_target_configure_version_file(vst-plugin)
+smtg_target_configure_version_file(polynomial-eq)
 
 # Specify the plugin format, version, etc.
 if (APPLE)
-    smtg_target_set_bundle(vst-plugin
+    smtg_target_set_bundle(polynomial-eq
             BUNDLE_IDENTIFIER "github.com/darilin98/vst-plugin"
             COMPANY_NAME "Darek Rudiš"
     )
 elseif (WIN32)
-    target_sources(vst-plugin
+    target_sources(polynomial-eq
             PRIVATE
             resources/win32resource.rc
     )
     if(MSVC)
-        set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT vst-plugin)
+        set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT polynomial-eq)
 
-        smtg_target_set_debug_executable(vst-plugin
+        smtg_target_set_debug_executable(polynomial-eq
                 "$(ProgramW6432)/Steinberg/VST3PluginTestHost/VST3PluginTestHost.exe"
                 "--pluginfolder \"$(OutDir)/\""
         )
@@ -179,7 +179,7 @@ endif()
 # Auto-copy view files
 #-------------------------------------------------------------------------------
 
-smtg_target_add_plugin_resources(vst-plugin
+smtg_target_add_plugin_resources(polynomial-eq
         RESOURCES
         "resources/Off_LED.png"
         "resources/on-off_LED.png"

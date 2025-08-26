@@ -15,7 +15,7 @@ CustomParamListener::~CustomParamListener()
         _param->removeDependent(this);
 }
 
-void CustomParamListener::update(Steinberg::FUnknown *changedUnknown, Steinberg::int32 message)
+void CustomParamListener::update(Steinberg::FUnknown *changedUnknown,const Steinberg::int32 message)
 {
     if (message == IDependent::kChanged && _view && _controller && _param) {
         float normalizedValue = static_cast<float>(_controller->getParamNormalized(_param->getInfo().id));

@@ -25,7 +25,7 @@ public:
     PluginProcessor() = default;
     ~PluginProcessor() override = default;
 
-    static FUnknown* createInstance(void*) { return (IAudioProcessor*)new PluginProcessor(); }
+    static FUnknown* createInstance(void*) { return static_cast<IAudioProcessor *>(new PluginProcessor()); }
 
     tresult PLUGIN_API getControllerClassId(TUID classId) SMTG_OVERRIDE;
     tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;
@@ -35,8 +35,8 @@ public:
     tresult PLUGIN_API setState(IBStream* state) SMTG_OVERRIDE;
     tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
 private:
-    bool getBypassState(const ProcessData& data) const;
-    std::vector<std::unique_ptr<FFTProcessor>>  fft_processors_;
+    [[nodiscard]] bool getBypassState(const ProcessData& data) const;
+    std::vector<std::unique_ptr<FFTProcessor>> fft_processors_;
     ParamValue bypassState = 0.0f;
     std::shared_ptr<Equalizer> equalizer_;
 };

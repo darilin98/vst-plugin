@@ -5,6 +5,10 @@
 #ifndef EQCONSTANTS_HPP
 #define EQCONSTANTS_HPP
 
+/**
+ * @namespace EQ
+ * @brief Contains defined value constants for shared use by the controller and processor.
+ */
 namespace EQ {
     constexpr float minFreq = 20.0f;
     constexpr float maxFreq = 20000.0f;

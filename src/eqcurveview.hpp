@@ -18,7 +18,6 @@
 #include "vstgui/lib/cdrawcontext.h"
 #include "vstgui/lib/idependency.h"
 #include "vstgui/plugin-bindings/vst3editor.h"
-#include "vstgui/lib/cgraphicspath.h"
 #include "vstgui/uidescription/editing/uiviewcreatecontroller.h"
 
 using controller_t = Steinberg::Vst::EditController*;
@@ -60,19 +59,22 @@ private:
 };
 
 namespace VSTGUI {
+
     struct EQCurveViewCreator : public ViewCreatorAdapter {
+
         EQCurveViewCreator() { UIViewFactory::registerViewCreator(*this); }
+
         [[nodiscard]] IdStringPtr getViewName() const override { return "EQCurveView"; }
+
         [[nodiscard]] IdStringPtr getBaseViewName() const override { return UIViewCreator::kCView; }
+
         CView* create(const UIAttributes& attr, const IUIDescription* d) const override {
             fprintf(stderr, "creating custom view");
             auto* view = new EQCurveView({0, 0, 100, 100});
 
-            auto* controller = dynamic_cast<VST3Editor*>(d->getController());
-            if (controller)
+            if (const auto* controller = dynamic_cast<VST3Editor*>(d->getController()))
             {
-                auto* editController = controller->getController();
-                if (editController)
+                if (auto* editController = controller->getController())
                 {
                     view->setParamListeners(editController);
                 }

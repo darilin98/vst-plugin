@@ -13,6 +13,10 @@
 using namespace Steinberg::Vst;
 using namespace Steinberg;
 
+/**
+ * @enum CustomParamID
+ * @brief Defines parameters used by the plugin
+ */
 enum CustomParamID : ParamID{
     kParamBypass = 101,
     kParamShift,
@@ -28,7 +32,7 @@ public:
     PluginController() = default;
     ~PluginController() override = default;
 
-    static FUnknown* createInstance(void*) { return (IEditController*)new PluginController(); }
+    static FUnknown* createInstance(void*) { return static_cast<IEditController *>(new PluginController()); }
     IPlugView* PLUGIN_API createView (FIDString name) SMTG_OVERRIDE;
 
     tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;

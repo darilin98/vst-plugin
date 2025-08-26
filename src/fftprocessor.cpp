@@ -26,7 +26,7 @@ FFTProcessor::~FFTProcessor()
 }
 
 void FFTProcessor::setEqualizer(std::shared_ptr<Equalizer> equalizer) {
-    equalizer_ = equalizer;
+    equalizer_ = std::move(equalizer);
 }
 
 void FFTProcessor::prepare(int32_t fft_size)

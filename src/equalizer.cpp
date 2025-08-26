@@ -9,9 +9,9 @@ void PolynomialEqualizer::modulate(fftwf_complex *freq_bins, int fft_size, int s
     const float maxFreq = sample_rate * 0.5f; // Nyquist frequency
     constexpr float dBMaxBoost = EQ::dBMaxBoost;
 
-    float centerFreq = expf( logf(minFreq) + param_shift_ * (logf(maxFreq) - logf(minFreq)) ); // Knob has a logarithmic feel -> converting back to linear
-    float flip = 1.0f - 2.0f * param_direction_;
-    float dBpeakGain = flip * param_intensity_ * dBMaxBoost;
+    const float centerFreq = expf( logf(minFreq) + param_shift_ * (logf(maxFreq) - logf(minFreq)) ); // Knob has a logarithmic feel -> converting back to linear
+    const float flip = 1.0f - 2.0f * param_direction_;
+    const float dBpeakGain = flip * param_intensity_ * dBMaxBoost;
 
     for (int i = 0; i < fft_size / 2 + 1; ++i) {
         float freq = (i * sample_rate) / fft_size;
@@ -19,8 +19,6 @@ void PolynomialEqualizer::modulate(fftwf_complex *freq_bins, int fft_size, int s
         // Normalize curve so that high/low frequencies get treated equally
         float x = (freq - centerFreq) / (centerFreq * param_width_);
 
-        //float shape = 1.0f - x*x;
-        // float shape = -powf(x, 4.0f) + powf(x, 3.0f) + powf(x, 2.0f) + 0.5f;
         float shape = shapeFromPreset(param_shape_, x);
         if (shape < 0.0f) shape = 0.0f;
 
@@ -47,12 +45,10 @@ void PolynomialEqualizer::update_params(ProcessData& data)
     tryUpdate(kParamDirection,param_direction_);
     tryUpdate(kParamWidth,param_width_);
 
-    ParamValue shapeVal;
-    if (getParameterValue(data, kParamShape, shapeVal)) {
+    if (ParamValue shapeVal; getParameterValue(data, kParamShape, shapeVal)) {
         auto index = static_cast<int32>(shapeVal * static_cast<int32>(EqShapePreset::Count));
         index = std::clamp(index, 0, static_cast<int32>(EqShapePreset::Count) - 1);
         param_shape_ = static_cast<EqShapePreset>(index);
     }
-
 }
 

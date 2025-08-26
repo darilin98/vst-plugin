@@ -71,7 +71,7 @@ IPlugView* PLUGIN_API PluginController::createView (FIDString name)
     return nullptr;
 }
 
-tresult PLUGIN_API PluginController::getParamStringByValue(ParamID id, ParamValue valueNormalized, String128 string)
+tresult PLUGIN_API PluginController::getParamStringByValue(const ParamID id, const ParamValue valueNormalized, String128 string)
 {
     if (id == kParamShape)
     {

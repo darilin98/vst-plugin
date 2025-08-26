@@ -12,16 +12,9 @@ namespace VSTGUI {
     : COptionMenu(size, nullptr, tag)
     { }
 
+    void PresetMenuListener::onOptionMenuPostPopup(COptionMenu *menu) {}
 
-    void PresetMenuListener::onOptionMenuPostPopup(COptionMenu *menu)
-    {
-
-    }
-
-    void PresetMenuListener::onOptionMenuPrePopup(COptionMenu *menu)
-    {
-
-    }
+    void PresetMenuListener::onOptionMenuPrePopup(COptionMenu *menu) {}
 
     bool PresetMenuListener::onOptionMenuSetPopupResult(COptionMenu *menu, COptionMenu *selectedMenu, int32_t selectedIndex)
     {
@@ -43,8 +36,5 @@ namespace VSTGUI {
 
         return true;
     }
-
-
-
 
 } // namespace VSTGUI

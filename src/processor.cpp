@@ -33,8 +33,7 @@ tresult PLUGIN_API PluginProcessor::setupProcessing(ProcessSetup &setup)
 
     equalizer_ = std::make_shared<PolynomialEqualizer>(); // Temporary only singe equalizer
 
-    BusInfo busInfo;
-    if (getBusInfo(kAudio, kInput, 0, busInfo) == kResultOk)
+    if (BusInfo busInfo{}; getBusInfo(kAudio, kInput, 0, busInfo) == kResultOk)
     {
         int32 maxChannels = busInfo.channelCount;
         fft_processors_.resize(maxChannels);
@@ -124,7 +123,6 @@ tresult PLUGIN_API PluginProcessor::getControllerClassId(TUID classId)
     if (!classId)
         return kInvalidArgument;
     // Copy the controller's FUID into cid
-
     PluginControllerUID.toTUID(classId);
     return kResultOk;
 }

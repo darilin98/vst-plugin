@@ -5,6 +5,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FetchContent)
 
+if(WIN32)
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/Zc:char8_t->")
+endif()
+
 project(polynomial-eq
         VERSION 1.0.0
         DESCRIPTION "Polynomial Equalizer"
@@ -14,7 +19,6 @@ project(polynomial-eq
 # Fetch Steinberg VST3 SDK
 #-------------------------------------------------------------------------------
 
-add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/Zc:char8_t->")
 set(SMTG_ENABLE_VST3_PLUGIN_EXAMPLES OFF CACHE BOOL "" FORCE)
 
 # Fetch the VST3 SDK

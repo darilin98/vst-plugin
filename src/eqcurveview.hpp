@@ -5,6 +5,11 @@
 #ifndef EQCURVEVIEW_HPP
 #define EQCURVEVIEW_HPP
 
+/**
+ * @file eqcurveview.hpp
+ * @brief Declares the @ref EQCurveView class and its helpers.
+ */
+
 #include <memory>
 
 #include "eqconstants.hpp"
@@ -25,16 +30,38 @@ using controller_t = Steinberg::Vst::EditController*;
 class CustomParamListener;
 using listener_t = std::unique_ptr<CustomParamListener>;
 
+/**
+ * @class EQCurveView
+ * @brief
+ */
 class EQCurveView : public VSTGUI::CView, public Steinberg::FObject {
 public:
     explicit EQCurveView(const VSTGUI::CRect& size)
         : CView(size) { }
 
+    /**
+     * @brief Main curve method called by the host.
+     *
+     * Draws an up-to-date graph of the EQ curve.
+     * @param dc A drawing context abstracting drawing regardless of OS
+     */
     void draw(VSTGUI::CDrawContext* dc) override;
     void setParamListeners(controller_t controller);
+    /**
+     * @brief Relays user input to internal states.
+     *
+     *
+     * @param id ID of the parameter being handled.
+     * @param normalizedValue Value to-be updated internally for rendering purposes.
+     */
     void onParamChanged(Steinberg::Vst::ParamID id, float normalizedValue);
 
 private:
+    /**
+     * @brief Helper that binds a frequency to the graph's X axis.
+     * @param freq EQ
+     * @return X value on the graph.
+     */
     [[nodiscard]] float freqToX(float freq) const;
     [[nodiscard]] float dbToY(float db) const;
     void drawFreqMarkers(VSTGUI::CDrawContext* dc) const;

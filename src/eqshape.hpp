@@ -8,7 +8,6 @@
 #include <cmath>
 
 /**
- * @enum EqShapePreset
  * @brief Lists presets for the shape of an EQ curve
  */
 enum EqShapePreset  {
@@ -25,10 +24,11 @@ namespace EqShape {
 }
 
 /**
- * @brief Converts selected preset from @EqShapePreset to a value for the purpose of drawing an EQ curve.
+ * @brief Converts selected preset from @ref EqShapePreset to a value for the purpose of drawing an EQ curve.
  * @param preset Selected preset option to-be converted to a value
  * @param x Point on the x-axis of the plot of the curve
  * @return Immediate curve value in the point of x
+ * @see EqShapePreset
  */
 inline float shapeFromPreset(const EqShapePreset preset, const float x) {
     switch (preset)

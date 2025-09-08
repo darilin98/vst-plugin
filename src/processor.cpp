@@ -31,7 +31,7 @@ tresult PLUGIN_API PluginProcessor::setupProcessing(ProcessSetup &setup)
     if(result != kResultOk)
         return result;
 
-    equalizer_ = std::make_shared<PolynomialEqualizer>(); // Temporary only singe equalizer
+    equalizer_ = std::make_shared<PolynomialEqualizer>();
 
     if (BusInfo busInfo{}; getBusInfo(kAudio, kInput, 0, busInfo) == kResultOk)
     {

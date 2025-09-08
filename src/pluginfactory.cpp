@@ -1,6 +1,12 @@
 //
 // Created by Darek Rudiš on 20.03.2025.
 //
+
+/**
+ * @file pluginfactory.cpp
+ * @brief States essential plugin metadata for the host.
+ */
+
 #include "public.sdk/source/main/pluginfactory.h"
 #include "public.sdk/source/vst/utility/stringconvert.h"
 #include "public.sdk/source/vst/vstcomponent.h"
@@ -9,7 +15,6 @@
 #include "pluginterfaces/base/ustring.h"
 #include "pluginterfaces/vst/ivstaudioprocessor.h"
 #include "pluginterfaces/vst/ivsteditcontroller.h"
-
 #include "processor.hpp"
 #include "controller.hpp"
 

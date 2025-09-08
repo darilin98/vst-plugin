@@ -7,7 +7,12 @@
 
 /**
  * @namespace EQ
- * @brief Contains defined value constants for shared use by the controller and processor.
+ * @brief Contains defined value constants
+ *
+ * Provides a common start point for use by the @ref PluginController and @ref PluginProcessor.
+ *
+ * @see PluginController
+ * @see PluginController
  */
 namespace EQ {
     constexpr float minFreq = 20.0f;

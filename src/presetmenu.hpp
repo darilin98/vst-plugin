@@ -2,6 +2,11 @@
 // Created by Darek Rudiš on 06.08.2025.
 //
 
+/**
+ * @file presetmenu.hpp
+ * @brief Defines all classes related to the preset menu selector view object.
+ */
+
 #ifndef PRESETMENU_HPP
 #define PRESETMENU_HPP
 
@@ -11,10 +16,13 @@
 #include "vstgui/uidescription/uiviewfactory.h"
 #include "vstgui/uidescription/detail/uiviewcreatorattributes.h"
 
+
 using controller_t = Steinberg::Vst::EditController*;
 
 namespace VSTGUI {
-
+    /**
+     * @brief Custom listener that overrides default SDK parameter update behavior.
+     */
     class PresetMenuListener : public IOptionMenuListener {
     public:
         explicit PresetMenuListener(controller_t controller) : _controller(controller) {}
@@ -28,6 +36,11 @@ namespace VSTGUI {
         controller_t _controller;
     };
 
+    /**
+     * @brief View object for selecting EQ curve shapes.
+     *
+     * @see eqshape.hpp
+     */
     class PresetMenu : public COptionMenu
     {
     public:
@@ -37,6 +50,9 @@ namespace VSTGUI {
     };
 
 
+    /**
+     * @brief @ref PresetMenu factory class.
+     */
     class PresetMenuCreator : public ViewCreatorAdapter
     {
     public:
@@ -44,7 +60,12 @@ namespace VSTGUI {
 
         [[nodiscard]] IdStringPtr getViewName () const override { return "PresetMenu"; }
         [[nodiscard]] IdStringPtr getBaseViewName () const override { return UIViewCreator::kCOptionMenu; }
-
+        /**
+         * @brief Creates an instance of @ref PresetMenu.
+         *
+         * Injects the @ref PresetMenuListener. Binds the kParamShape parameter tag from @ref CustomParamID.
+         * @return An instance of @ref PresetMenu
+         */
         CView* create (const UIAttributes& attributes, const IUIDescription* description) const override
         {
             const CRect size (CPoint (0, 0), CPoint (100, 20));

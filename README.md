@@ -6,6 +6,12 @@ The goal of this project is to create a working VST3 plugin that can be used in 
 
 This plugin will later be forked and used to create a more advanced VST plugin that experiments with various audio processing technology.
 
+## Usage demonstration
+
+<p align="center">
+    <img src="docs/resources/preview.gif" alt="preview"/>
+</p>
+
 ## Features
 
 - An interactive equalizer giving you control over the frequency range

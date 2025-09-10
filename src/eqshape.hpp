@@ -11,10 +11,10 @@
  * @brief Lists presets for the shape of an EQ curve
  */
 enum EqShapePreset  {
-    Bell,
+    SoftNotch,
     Wave,
     LeftRiser,
-    TwoHills,
+    Valley,
     // More shapes to be added
     Count ///< Indicates number of presets defined.
 };
@@ -23,7 +23,7 @@ enum EqShapePreset  {
  * @brief Defines the default selected shape in @ref PresetMenu
  */
 namespace EqShape {
-    constexpr EqShapePreset kDefaultEqShape = Bell;
+    constexpr EqShapePreset kDefaultEqShape = SoftNotch;
 }
 
 /**
@@ -38,12 +38,12 @@ inline float shapeFromPreset(const EqShapePreset preset, const float x) {
     {
         case LeftRiser:
             return 1.5f - powf(x, 2.0f);
-        case Bell:
+        case SoftNotch:
             return (expf(5.0f * x) - 1.0f) * (expf(5.0f * (1.0f - x)) - 1.0f)  / powf(expf(5.0f * 0.5f) - 1.0f, 2.0f);
         case Wave:
             return -powf(x, 4.0f) + powf(x, 3.0f) + powf(x, 2.0f) + 0.5f;
-        case TwoHills:
-            return -0.27f * powf(x, 4.0f) + 0.6f * powf(x, 3.0f) + 0.9f * powf(x, 2.0f) - x;
+        case Valley:
+            return -0.27f * powf(x, 4.0f) + 0.6f * powf(x, 3.0f) + 0.6f * powf(x, 2.0f) - x;
         default:
             return 0.0f;
     }

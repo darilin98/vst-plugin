@@ -78,10 +78,10 @@ tresult PLUGIN_API PluginController::getParamStringByValue(const ParamID id, con
         int index = static_cast<int>(valueNormalized * (static_cast<int>(EqShapePreset::Count) - 1) + 0.5);
         const char* name;
         switch (static_cast<EqShapePreset>(index)) {
-            case EqShapePreset::Bell: name = "Bell"; break;
+            case EqShapePreset::SoftNotch: name = "Soft Notch"; break;
             case EqShapePreset::Wave: name = "Wave"; break;
             case EqShapePreset::LeftRiser: name = "Left Riser"; break;
-            case EqShapePreset::TwoHills: name = "Two Hills"; break;
+            case EqShapePreset::Valley: name = "The Valley"; break;
 
             default: name = "Unknown"; break;
         }

@@ -31,8 +31,9 @@ class CustomParamListener;
 using listener_t = std::unique_ptr<CustomParamListener>;
 
 /**
- * @class EQCurveView
- * @brief
+ * @brief Visualizes the current state of the EQ curve.
+ *
+ * Manages the live visualization of the EQ curve and reflects the changes made by altering parameters.
  */
 class EQCurveView : public VSTGUI::CView, public Steinberg::FObject {
 public:

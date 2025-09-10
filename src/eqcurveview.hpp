@@ -86,7 +86,9 @@ private:
 };
 
 namespace VSTGUI {
-
+    /**
+     * @brief Factory method for @ref EQCurveView
+     */
     struct EQCurveViewCreator : public ViewCreatorAdapter {
 
         EQCurveViewCreator() { UIViewFactory::registerViewCreator(*this); }
@@ -115,6 +117,11 @@ namespace VSTGUI {
 using param_t = Steinberg::Vst::Parameter*;
 using view_t = EQCurveView*;
 
+/**
+ * @brief Detects changes made to a parameter by the user.
+ *
+ * One listener is bound to one parameter at a time. Multiple instances need to be used to cover each parameter of the controller.
+ */
 class CustomParamListener : public Steinberg::FObject {
 public:
     CustomParamListener(param_t param, view_t view, controller_t controller);

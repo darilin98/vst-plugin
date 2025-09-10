@@ -19,6 +19,9 @@ enum EqShapePreset  {
     Count ///< Indicates number of presets defined.
 };
 
+/**
+ * @brief Defines the default selected shape in @ref PresetMenu
+ */
 namespace EqShape {
     constexpr EqShapePreset kDefaultEqShape = Bell;
 }

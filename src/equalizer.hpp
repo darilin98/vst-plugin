@@ -17,6 +17,11 @@
 using namespace Steinberg::Vst;
 using namespace Steinberg;
 
+/**
+ * @brief Modulates frequency data.
+ *
+ * Transforms frequency data based on values specified by parameters.
+ */
 class Equalizer {
 public:
     virtual ~Equalizer() = default;
@@ -26,6 +31,11 @@ public:
 
 };
 
+/**
+ * @brief Modulates frequency data based on a polynomial function.
+ *
+ * Transforms frequency data by a function defined by parameters.
+ */
 class PolynomialEqualizer : public Equalizer {
 public:
     void modulate(fftwf_complex* freq_bins, int fft_size, int sample_rate) override;

@@ -23,6 +23,10 @@ This plugin will later be forked and used to create a more advanced VST plugin t
 - **macOS**: Apple Silicon (ARM64) macOS 11 or later  
 - 64-bit DAW with VST3 support
 
+## Installing the plugin
+
+If you are interested in running and using the plugin for yourself, visit [this page](docs/build_guide.md) for a detailed step-by-step guide on how to get you started.
+
 ## Further reading
 
 - [Brief user guide](docs/index.md)

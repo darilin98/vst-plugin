@@ -14,8 +14,10 @@ This plugin will later be forked and used to create a more advanced VST plugin t
 
 ## Features
 
-- An interactive equalizer giving you control over the frequency range
+- An interactive equalizer giving you control over the entire frequency range
 - Live EQ curve visualization
+- Many shape presents to choose from.
+- Real-time audio processing.
 
 ## System Requirements
 
@@ -29,5 +31,5 @@ If you are interested in running and using the plugin for yourself, visit [this 
 
 ## Further reading
 
-- [Brief user guide](docs/index.md)
+- [Brief user guide](docs/user_guide.md)
 - [Full project documentation](https://darilin98.github.io/vst-plugin/index.html)

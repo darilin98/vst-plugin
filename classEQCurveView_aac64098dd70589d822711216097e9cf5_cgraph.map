@@ -1,0 +1,15 @@
+<map id="EQCurveView::draw" name="EQCurveView::draw">
+<area shape="rect" id="Node000001" title="Core rendering method of the view." alt="" coords="5,84,155,109"/>
+<area shape="rect" id="Node000002" href="$classEQCurveView.html#ac59e52ff3897ed439e7ed3f030aab7ee" title=" " alt="" coords="486,23,641,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,82,140,49,170,32,202,20,278,6,356,3,430,9,493,18,492,23,429,14,356,9,279,11,203,25,172,37,143,53,98,86"/>
+<area shape="rect" id="Node000003" href="$classEQCurveView.html#a4bba398cd5bd372c0f52ac40f57e8fb2" title=" " alt="" coords="208,35,427,60"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="141,82,242,60,243,66,142,87"/>
+<area shape="rect" id="Node000004" href="$classEQCurveView.html#a1d6f3f02d3ec78149e1228a53b2f373b" title=" " alt="" coords="203,84,432,109"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="155,94,189,94,189,99,155,99"/>
+<area shape="rect" id="Node000005" href="$classEQCurveView.html#ad64b165e0a459d18601495af9d099ed3" title="Helper that binds a frequency to the graph&#39;s X axis." alt="" coords="480,97,647,123"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="131,107,203,120,271,124,340,124,466,118,466,123,341,130,271,129,202,125,130,112"/>
+<area shape="rect" id="Node000006" href="$eqshape_8hpp.html#af9de620c284589a47fec7713a0ffd654" title="Converts selected preset from EqShapePreset to a value for the purpose of drawing an EQ curve." alt="" coords="250,185,385,211"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="102,107,147,135,204,164,248,179,246,184,202,169,145,140,99,112"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="427,39,472,37,473,43,427,45"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="432,100,467,102,466,108,432,106"/>
+</map>

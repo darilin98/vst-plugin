@@ -1,0 +1,7 @@
+<map id="shapeFromPreset" name="shapeFromPreset">
+<area shape="rect" id="Node000001" title="Converts selected preset from EqShapePreset to a value for the purpose of drawing an EQ curve." alt="" coords="208,35,343,60"/>
+<area shape="rect" id="Node000002" href="$classEQCurveView.html#aac64098dd70589d822711216097e9cf5" title="Core rendering method of the view." alt="" coords="8,5,157,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="194,38,157,32,158,27,195,32"/>
+<area shape="rect" id="Node000003" href="$classPolynomialEqualizer.html#a13d00fa8c0589e9d61176efbea4c3875" title=" " alt="" coords="5,55,160,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="195,62,161,67,160,61,194,56"/>
+</map>

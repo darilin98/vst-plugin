@@ -1,0 +1,5 @@
+<map id="PluginProcessor::getBypassState" name="PluginProcessor::getBypassState">
+<area shape="rect" id="Node000001" title="Helper to safely get the plugin&#39;s bypass state." alt="" coords="236,5,437,45"/>
+<area shape="rect" id="Node000002" href="$classPluginProcessor.html#ad83a3d5d0181feb8fa2a2581430de8be" title="Main processing method." alt="" coords="5,13,188,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="222,28,188,28,188,23,222,23"/>
+</map>

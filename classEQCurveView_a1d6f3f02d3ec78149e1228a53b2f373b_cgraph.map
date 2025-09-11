@@ -1,0 +1,5 @@
+<map id="EQCurveView::drawFreqMarkers" name="EQCurveView::drawFreqMarkers">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,235,31"/>
+<area shape="rect" id="Node000002" href="$classEQCurveView.html#ad64b165e0a459d18601495af9d099ed3" title="Helper that binds a frequency to the graph&#39;s X axis." alt="" coords="283,5,449,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="235,15,269,15,269,21,235,21"/>
+</map>

@@ -1,0 +1,36 @@
+<map id="eqconstants.hpp" name="eqconstants.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="460,5,589,31"/>
+<area shape="rect" id="Node000002" href="$controller_8hpp.html" title=" " alt="" coords="469,79,580,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="527,44,527,79,522,79,522,44"/>
+<area shape="rect" id="Node000005" href="$equalizer_8hpp.html" title=" " alt="" coords="226,152,335,177"/>
+<area shape="poly" id="edge19_Node000001_Node000005" title=" " alt="" coords="495,40,301,154,299,150,492,36"/>
+<area shape="rect" id="Node000014" href="$eqcurveview_8hpp.html" title="Declares the EQCurveView class and its helpers." alt="" coords="748,79,880,104"/>
+<area shape="poly" id="edge16_Node000001_Node000014" title=" " alt="" coords="585,31,768,76,767,81,584,37"/>
+<area shape="rect" id="Node000003" href="$controller_8cpp.html" title=" " alt="" coords="613,152,724,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="561,108,646,149,644,154,559,112"/>
+<area shape="rect" id="Node000004" href="$eqcurveview_8cpp.html" title=" " alt="" coords="749,152,879,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="585,105,768,149,767,154,584,110"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="473,110,321,154,319,149,472,105"/>
+<area shape="rect" id="Node000010" href="$pluginfactory_8cpp.html" title="States essential plugin metadata for the host." alt="" coords="458,372,591,397"/>
+<area shape="poly" id="edge12_Node000002_Node000010" title=" " alt="" coords="540,115,553,151,558,217,552,281,541,335,531,372,526,371,536,334,547,280,553,217,547,153,535,117"/>
+<area shape="rect" id="Node000011" href="$processor_8cpp.html" title=" " alt="" coords="271,372,381,397"/>
+<area shape="poly" id="edge15_Node000002_Node000011" title=" " alt="" coords="467,111,431,128,400,154,384,175,374,195,365,233,361,274,350,325,333,372,328,371,345,323,356,273,360,232,369,193,380,172,396,150,428,124,464,106"/>
+<area shape="rect" id="Node000012" href="$presetmenu_8hpp.html" title="Defines all classes related to the preset menu selector view object." alt="" coords="410,152,538,177"/>
+<area shape="poly" id="edge13_Node000002_Node000012" title=" " alt="" coords="510,117,484,153,480,150,506,114"/>
+<area shape="rect" id="Node000006" href="$equalizer_8cpp.html" title=" " alt="" coords="5,225,113,251"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="233,184,96,228,94,223,232,179"/>
+<area shape="rect" id="Node000007" href="$fftprocessor_8hpp.html" title=" " alt="" coords="137,225,264,251"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="260,188,216,227,212,223,256,184"/>
+<area shape="rect" id="Node000009" href="$processor_8hpp.html" title=" " alt="" coords="223,299,335,324"/>
+<area shape="poly" id="edge11_Node000005_Node000009" title=" " alt="" coords="283,191,282,298,277,298,278,191"/>
+<area shape="rect" id="Node000008" href="$fftprocessor_8cpp.html" title=" " alt="" coords="74,299,199,324"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="183,263,149,300,145,297,179,259"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="225,258,268,296,265,300,222,262"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="332,325,486,369,484,374,331,330"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="297,334,321,370,316,373,292,337"/>
+<area shape="rect" id="Node000013" href="$presetmenu_8cpp.html" title=" " alt="" coords="411,225,537,251"/>
+<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="477,191,477,225,471,225,471,191"/>
+<area shape="poly" id="edge17_Node000014_Node000004" title=" " alt="" coords="817,118,817,152,811,152,811,118"/>
+<area shape="rect" id="Node000015" href="$paramlistener_8cpp.html" title=" " alt="" coords="903,152,1042,177"/>
+<area shape="poly" id="edge18_Node000014_Node000015" title=" " alt="" coords="853,107,948,149,946,154,851,112"/>
+</map>

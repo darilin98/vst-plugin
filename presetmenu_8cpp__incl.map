@@ -1,0 +1,27 @@
+<map id="presetmenu.cpp" name="presetmenu.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="779,5,905,31"/>
+<area shape="rect" id="Node000002" href="$presetmenu_8hpp.html" title="Defines all classes related to the preset menu selector view object." alt="" coords="707,79,835,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="832,33,794,71,790,67,828,29"/>
+<area shape="rect" id="Node000012" href="$eqshape_8hpp.html" title=" " alt="" coords="1025,79,1131,104"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="881,28,1027,72,1026,77,879,33"/>
+<area shape="rect" id="Node000003" href="$controller_8hpp.html" title=" " alt="" coords="311,159,421,185"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="707,105,581,126,435,155,419,158,418,153,433,149,580,120,707,100"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="446,152,585,192"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="735,107,591,151,589,145,733,101"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="609,152,760,192"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="760,106,718,145,714,141,757,102"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="784,152,935,192"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="786,102,830,141,826,145,783,106"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="959,152,1189,192"/>
+<area shape="poly" id="edge10_Node000002_Node000011" title=" " alt="" coords="816,101,989,146,987,151,815,107"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,240,164,280"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="329,187,161,238,159,233,327,182"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="189,240,351,280"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="355,187,303,233,300,229,351,183"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="376,240,548,280"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="381,183,432,229,429,233,377,187"/>
+<area shape="rect" id="Node000007" href="$eqconstants_8hpp.html" title=" " alt="" coords="572,247,701,273"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="403,182,588,241,587,246,402,187"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="1213,159,1276,185"/>
+<area shape="poly" id="edge12_Node000012_Node000013" title=" " alt="" coords="1103,102,1209,151,1207,156,1101,106"/>
+</map>

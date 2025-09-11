@@ -1,0 +1,10 @@
+<map id="CustomParamListener" name="CustomParamListener">
+<area shape="rect" id="Node000001" title="Detects changes made to a parameter by the user." alt="" coords="15,168,181,193"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,148,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,44,99,168,94,168,77,45"/>
+<area shape="rect" id="Node000003" href="$classEQCurveView.html" title="Visualizes the current state of the EQ curve." alt="" coords="115,80,225,105"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="104,37,156,77,153,82,101,41"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="154,118,110,169,106,166,150,114"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="173,5,293,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="215,43,182,81,178,78,211,40"/>
+</map>

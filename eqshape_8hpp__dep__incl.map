@@ -1,0 +1,28 @@
+<map id="eqshape.hpp" name="eqshape.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="251,5,357,31"/>
+<area shape="rect" id="Node000002" href="$controller_8cpp.html" title=" " alt="" coords="30,79,141,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="257,37,122,81,120,76,255,32"/>
+<area shape="rect" id="Node000003" href="$eqcurveview_8hpp.html" title="Declares the EQCurveView class and its helpers." alt="" coords="165,79,297,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="284,42,244,80,241,77,280,38"/>
+<area shape="rect" id="Node000006" href="$equalizer_8hpp.html" title=" " alt="" coords="323,79,432,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="328,38,367,77,364,80,324,42"/>
+<area shape="rect" id="Node000013" href="$presetmenu_8cpp.html" title=" " alt="" coords="457,79,583,104"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="353,32,486,76,484,81,351,37"/>
+<area shape="rect" id="Node000004" href="$eqcurveview_8cpp.html" title=" " alt="" coords="5,152,136,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="194,112,98,154,96,149,192,107"/>
+<area shape="rect" id="Node000005" href="$paramlistener_8cpp.html" title=" " alt="" coords="160,152,299,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="233,118,232,152,227,152,228,118"/>
+<area shape="rect" id="Node000007" href="$equalizer_8cpp.html" title=" " alt="" coords="323,152,431,177"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="380,118,380,152,375,152,375,118"/>
+<area shape="rect" id="Node000008" href="$fftprocessor_8hpp.html" title=" " alt="" coords="455,152,582,177"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="413,108,497,149,494,154,411,112"/>
+<area shape="rect" id="Node000010" href="$processor_8hpp.html" title=" " alt="" coords="564,225,676,251"/>
+<area shape="poly" id="edge12_Node000006_Node000010" title=" " alt="" coords="442,104,536,128,574,140,595,150,608,168,616,188,622,225,617,225,611,190,604,170,592,154,572,145,535,133,441,110"/>
+<area shape="rect" id="Node000009" href="$fftprocessor_8cpp.html" title=" " alt="" coords="415,225,540,251"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="507,191,486,227,482,224,503,188"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="548,183,605,223,602,227,545,187"/>
+<area shape="rect" id="Node000011" href="$pluginfactory_8cpp.html" title="States essential plugin metadata for the host." alt="" coords="480,299,613,324"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="600,262,560,300,557,297,596,258"/>
+<area shape="rect" id="Node000012" href="$processor_8cpp.html" title=" " alt="" coords="638,299,749,324"/>
+<area shape="poly" id="edge11_Node000010_Node000012" title=" " alt="" coords="644,258,683,297,680,300,640,262"/>
+</map>

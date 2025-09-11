@@ -143,7 +143,7 @@ smtg_target_configure_version_file(polynomial-eq)
 # Specify the plugin format, version, etc.
 if (APPLE)
     smtg_target_set_bundle(polynomial-eq
-            BUNDLE_IDENTIFIER "github.com/darilin98/vst-plugin"
+            BUNDLE_IDENTIFIER "github.com/darilin98/polynomial-eq"
             COMPANY_NAME "Darek Rudiš"
     )
 elseif (WIN32)

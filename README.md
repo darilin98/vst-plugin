@@ -34,4 +34,4 @@ But the compilation process is not very complicated. If you are interested in ru
 ## Help & Documentation
 
 - [Brief user guide](docs/user_guide.md)
-- [Full project documentation](https://darilin98.github.io/vst-plugin/index.html)
+- [Full project documentation](https://darilin98.github.io/polynomial-eq/index.html)

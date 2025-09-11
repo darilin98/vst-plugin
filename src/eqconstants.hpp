@@ -7,7 +7,7 @@
 
 /**
  * @namespace EQ
- * @brief Contains defined value constants
+ * @brief Contains defined value constants for parameter values
  *
  * Provides a common start point for use by the @ref PluginController and @ref PluginProcessor.
  *

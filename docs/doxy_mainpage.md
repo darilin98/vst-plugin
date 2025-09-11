@@ -17,7 +17,7 @@ Polynomial Equalizer is a VST plugin capable of being used in any VST3-supportin
 - **Live audio EQ**
   - The plugin works smoothly in real time.
 
-## Architecture
+## How it works
 
 Polynomial Equalizer works thanks to an FFT processing pipeline.
 

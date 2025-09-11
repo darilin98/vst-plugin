@@ -27,9 +27,11 @@ This plugin will later be forked and used to create a more advanced VST plugin t
 
 ## Installing the plugin
 
-If you are interested in running and using the plugin for yourself, visit [this page](docs/build_guide.md) for a detailed step-by-step guide on how to get you started.
+Due to a conflict in licenses the plugin binaries cannot be distributed.
 
-## Further reading
+But the compilation process is not very complicated. If you are interested in running and using the plugin for yourself, visit [this page](docs/build_guide.md) for a detailed step-by-step guide on how to get you started.
+
+## Help & Documentation
 
 - [Brief user guide](docs/user_guide.md)
 - [Full project documentation](https://darilin98.github.io/vst-plugin/index.html)

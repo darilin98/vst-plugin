@@ -27,6 +27,8 @@ enum CustomParamID : ParamID{
 
 /**
  * @brief Custom implementation of the VSTSDK @ref EditController
+ *
+ * Manages plugin states and parameter values. Communicates with a VSTGUI instance.
  */
 class PluginController : public EditController
 {

@@ -20,7 +20,7 @@ enum EqShapePreset  {
 };
 
 /**
- * @brief Defines the default selected shape in @ref PresetMenu
+ * @brief Defines the default selected EQ curve shape in @ref PresetMenu
  */
 namespace EqShape {
     constexpr EqShapePreset kDefaultEqShape = SoftNotch;

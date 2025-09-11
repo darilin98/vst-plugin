@@ -6,9 +6,9 @@ This means that it needs to respect the design pattern provided by the `VST3SDK`
 
 ### The plugin itself is divided into 2 core parts:
 
-    PluginProcessor
-
-    PluginController
+    a) PluginProcessor
+    
+    b) PluginController
 
 ---
 
@@ -25,6 +25,14 @@ Transforms time-domain samples to frequency-domain data.
 Delegates the data to an `Equalizer` which transforms it by its own definition.
 
 Reconstructs modified audio data.
+
+### PolynomialEqualizer
+
+Is an implementation of the abstract `Equalizer`
+
+Defines its modulation by a polynomial function.
+
+Makes use of user parameters to shape the EQ curve.
 
 ---
 

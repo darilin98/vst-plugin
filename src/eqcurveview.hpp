@@ -41,7 +41,7 @@ public:
         : CView(size) { }
 
     /**
-     * @brief Main curve method called by the host.
+     * @brief Core rendering method of the view
      *
      * Draws an up-to-date graph of the EQ curve.
      * @param dc A drawing context abstracting drawing regardless of OS

@@ -48,6 +48,14 @@ private:
     EqShapePreset param_shape_ = EqShape::kDefaultEqShape;
 };
 
+/**
+ * @brief Extracts current parameter values from data provided by the host.
+ *
+ * @param data Data that the host provides
+ * @param id ID of the parameter being handled
+ * @param outValue Resulting parameter value
+ * @return A boolean value based on whether the parameter value got updated.
+ */
 inline bool getParameterValue(ProcessData& data, CustomParamID id, ParamValue& outValue)
 {
     if (!data.inputParameterChanges)

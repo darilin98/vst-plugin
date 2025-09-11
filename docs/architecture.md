@@ -4,9 +4,13 @@ As mentioned before, the Polynomial Equalizer project is a `VST3` plugin.
 
 This means that it needs to respect the design pattern provided by the `VST3SDK`.
 
----
+### The plugin itself is divided into 2 core parts:
 
-*The plugin itself is divided into 2 core parts:*
+    PluginProcessor
+
+    PluginController
+
+---
 
 ## PluginProcessor
 
@@ -37,6 +41,12 @@ Registers the main `VSTGUI` view.
 This GUI framework provided by the SDK constructs a view defined in a `.uidesc` file.
 
 It also intializes custom views with a defined factory class such as `EQCurveView` which displays a live function graph.
+
+---
+
+## Project diagram
+
+![diagram](resources/polyeq.svg)
 
 ---
 

@@ -27,6 +27,8 @@ For each channel:
 - A frequency-domain transformation defined in the Equalizer is applied to it.
 - The transformed result is then reconstructed and outputted.
 
+Visit [this page](architecture.md) for a more detailed description + a full project diagram.
+
 ## External dependencies
 
 - [`VST3SDK`](https://github.com/steinbergmedia/vst3sdk)

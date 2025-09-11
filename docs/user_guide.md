@@ -4,9 +4,7 @@ The plugin itself is designed to be very simple and intuitive.
 
 Once you load it to your DAW (see [the build guide](build_guide.md)), you will be presented with this interface.
 
-<p align="center">
-    <img src="resources/plugin.png" alt="plugin"/>
-</p>
+![plugin](resources/plugin.png)
 
 ## Parameter description
 

@@ -1,4 +1,4 @@
-# High-level project design overview
+# Project architecture
 
 As mentioned before, the Polynomial Equalizer project is a `VST3` plugin.
 
@@ -46,7 +46,7 @@ It also intializes custom views with a defined factory class such as `EQCurveVie
 
 ## Project diagram
 
-![diagram](resources/polyeq.svg)
+![Class diagram](resources/polyeq.svg)
 
 ---
 
